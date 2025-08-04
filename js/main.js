@@ -49,7 +49,7 @@
 	'use trict';
 		// How long you want the animation to take, in ms
 		const animationDuration = 2000;
-		// Calculate how long each â€˜frameâ€™ should last if we want to update the animation 60 times per second
+		// Calculate how long each ˜frame should last if we want to update the animation 60 times per second
 		const frameDuration = 1000 / 60;
 		// Use that to calculate how many frames we need to complete the animation
 		const totalFrames = Math.round( animationDuration / frameDuration );
