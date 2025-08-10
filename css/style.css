@@ -1620,11 +1620,11 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5,
     -ms-transition: all 0.3s ease;
     transition: all 0.3s ease; }
   .ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
-    font-size: 15px;
+    font-size: 13px;
     padding-top: 1.4rem;
     padding-bottom: 1.4rem;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 18px;
+    padding-right: 18px;
     color: rgba(255, 255, 255, 0.7);
     font-weight: 500; }
     .ftco-navbar-light .navbar-nav > .nav-item > .nav-link span {
