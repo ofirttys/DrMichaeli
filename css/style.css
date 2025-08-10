@@ -1765,17 +1765,6 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5,
   100% {
     opacity: 1; } }
       @media (max-width: 767.98px) {
-		    .hero-wrap {
-    min-height: 100vh;
-    height: auto; /* Allow it to grow beyond viewport height if needed */
-    background-attachment: scroll; /* Fixed attachment can cause issues on mobile */
-  }
-  
-  .hero-wrap .slider-text {
-    min-height: 100vh;
-    height: auto; /* Allow content to determine height */
-    padding: 80px 0 40px 0; /* Add padding to ensure content fits */
-  }
         .hero-wrap .slider-text h1, .hero-wrap .slider-text .h1 {
           font-size: 40px; } }
     .hero-wrap .slider-text .social-media {
