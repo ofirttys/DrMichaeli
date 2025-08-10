@@ -2128,6 +2128,39 @@ textarea.form-control {
       font-family: "Roboto", Arial, sans-serif;
       color: #0779e4; }
 
+.services-2 .icon span.flaticon-bloodwork {
+  background-image: url('images/icons/bloodwork.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-size: 0;
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+.services-2 .icon span.flaticon-uterus {
+  background-image: url('images/icons/uterus.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-size: 0;
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+.services-2 .icon span.flaticon-sperm {
+  background-image: url('images/icons/sperm.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-size: 0;
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
 .block-7 {
   width: 100%;
   position: relative;
@@ -2364,7 +2397,7 @@ textarea.form-control {
   line-height: 1.4; }
   @media (max-width: 991.98px) {
     .heading-section h2, .heading-section .h2 {
-      font-size: 28px; } }
+      font-size: 24px; } }
 
 .heading-section h3, .heading-section .h3 {
   font-size: 24px;
