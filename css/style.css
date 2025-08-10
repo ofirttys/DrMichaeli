@@ -2129,7 +2129,7 @@ textarea.form-control {
       color: #0779e4; }
 
 .services-2 .icon span.flaticon-bloodwork {
-  background-image: url('images/icons/bloodwork.png');
+  background-image: url('../images/icons/bloodwork.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -2140,7 +2140,7 @@ textarea.form-control {
 }
 
 .services-2 .icon span.flaticon-uterus {
-  background-image: url('images/icons/uterus.png');
+  background-image: url('../images/icons/uterus.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -2151,7 +2151,7 @@ textarea.form-control {
 }
 
 .services-2 .icon span.flaticon-sperm {
-  background-image: url('images/icons/sperm.png');
+  background-image: url('../images/icons/sperm.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
