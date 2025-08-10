@@ -1528,6 +1528,32 @@ textarea.form-control {
     padding-right: 3rem !important;
     padding-left: 3rem !important; } }
 
+#policies .block-7 .p-4.px-lg-5 {
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+}
+
+/media (max-width: 991.98px) {
+  #policies .block-7 .p-4.px-lg-5 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+.block-7 .policy-list {
+    list-style: disc;
+    padding-left: 20px;
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.block-7 .policy-list li {
+    text-align: left;
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+
 body {
   font-family: "Roboto", Arial, sans-serif;
   background: #f8f8f8;
