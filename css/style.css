@@ -2532,10 +2532,7 @@ textarea.form-control {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-}
-
-.testimony-wrap .msg:last-child {
-    margin-top: auto;
+	justify-content: flex-start;
 }
 
   .testimony-wrap .icon {
