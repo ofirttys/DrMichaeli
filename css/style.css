@@ -2506,7 +2506,13 @@ textarea.form-control {
       color: #fff; }
     .testimony-section .tns-item:not(.tns-slide-active) + .tns-slide-active + .tns-slide-active .testimony-wrap .position {
       color: #fff; }
-
+	.testimony-section .tns-item:not(.tns-slide-active) + .tns-slide-active + .tns-slide-active .testimony-wrap a {
+		color: #fff !important;
+	}
+	.testimony-section .tns-item:not(.tns-slide-active) + .tns-slide-active + .tns-slide-active .testimony-wrap a:hover {
+		color: #e0e0e0 !important;
+	}
+	
 .testimony-wrap {
   display: block;
   position: relative;
