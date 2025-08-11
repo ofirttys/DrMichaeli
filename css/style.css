@@ -2520,7 +2520,7 @@ textarea.form-control {
   padding: 35px 30px 30px 30px !important;
   width: 98%;
   margin: 0 auto;
-    min-height: 700px;
+    min-height: 525px;
     display: flex;
     flex-direction: column;
 
