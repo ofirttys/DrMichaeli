@@ -2471,14 +2471,14 @@ h5,
 @media (max-width: 575.98px) {
 
 	.hero-wrap {
-		height: 70vh
-		min-height: 400px;
+		height: 50vh
+		min-height: 300px;
 		background-size: cover;
 	}
 	
 	.hero-wrap .slider-text {
-		height: 70vh;
-		min-height: 400px;
+		height: 50vh;
+		min-height: 300px;
 	}
 
 	.hero-wrap .slider-text h1,
