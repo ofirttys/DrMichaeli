@@ -2427,7 +2427,7 @@ h5,
 		min-height: 600px;
 		background-attachment: scroll;
 		background-position: center center;
-		background-size: contain;
+		background-size: cover;
 		background-repeat: no-repeat;
 	}
 	
@@ -2473,7 +2473,7 @@ h5,
 	.hero-wrap {
 		height: 100vh
 		min-height: 550px;
-		background-size: contain;
+		background-size: cover;
 	}
 	
 	.hero-wrap .slider-text {
