@@ -2472,13 +2472,13 @@ h5,
 
 	.hero-wrap {
 		height: 50vh
-		min-height: 300px;
+		min-height: 200px;
 		background-size: cover;
 	}
 	
 	.hero-wrap .slider-text {
 		height: 50vh;
-		min-height: 300px;
+		min-height: 200px;
 	}
 
 	.hero-wrap .slider-text h1,
@@ -2488,7 +2488,7 @@ h5,
 	}
 
 	.hero-wrap .slider-text .text {
-		max-width: 225px;
+		max-width: 200px;
 		padding: 20px 0;
 	}
 	
