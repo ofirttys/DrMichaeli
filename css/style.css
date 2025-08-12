@@ -2423,8 +2423,8 @@ h5,
 @media (max-width: 767.98px) {
 
 	.hero-wrap {
-		height: 80vh;
-		min-height: 500px;
+		height: 70vh;
+		min-height: 400px;
 		background-attachment: scroll;
 		background-position: center center;
 		background-size: cover;
@@ -2432,8 +2432,8 @@ h5,
 	}
 	
 	.hero-wrap .slider-text {
-		height: 80vh;
-		min-height: 500px;
+		height: 70vh;
+		min-height: 400px;
 	}
 	
 	.hero-wrap .slider-text h1,
