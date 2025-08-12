@@ -2432,8 +2432,8 @@ h5,
 	}
 	
 	.hero-wrap .slider-text {
-		height: 90vh;
-		min-height: 500px;
+		height: 100vh;
+		min-height: 550px;
 	}
 	
 	.hero-wrap .slider-text h1,
@@ -2471,8 +2471,8 @@ h5,
 @media (max-width: 575.98px) {
 
 	.hero-wrap {
-		height: 80vh
-		min-height: 450px;
+		height: 90vh
+		min-height: 500px;
 		background-size: contain;
 	}
 	
