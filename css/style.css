@@ -2423,8 +2423,8 @@ h5,
 @media (max-width: 767.98px) {
 
 	.hero-wrap {
-		height: 100vh;
-		min-height: 600px;
+		height: 90vh;
+		min-height: 550px;
 		background-attachment: scroll;
 		background-position: center center;
 		background-size: cover;
@@ -2432,8 +2432,8 @@ h5,
 	}
 	
 	.hero-wrap .slider-text {
-		height: 100vh;
-		min-height: 600px;
+		height: 90vh;
+		min-height: 550px;
 	}
 	
 	.hero-wrap .slider-text h1,
@@ -2471,14 +2471,14 @@ h5,
 @media (max-width: 575.98px) {
 
 	.hero-wrap {
-		height: 100vh
-		min-height: 550px;
+		height: 80vh
+		min-height: 500px;
 		background-size: cover;
 	}
 	
 	.hero-wrap .slider-text {
-		height: 100vh;
-		min-height: 550px;
+		height: 80vh;
+		min-height: 500px;
 	}
 
 	.hero-wrap .slider-text h1,
