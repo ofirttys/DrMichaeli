@@ -2423,16 +2423,17 @@ h5,
 @media (max-width: 767.98px) {
 
 	.hero-wrap {
-		height: 100vh;
-		min-height: 600px;
+		height: 80vh;
+		min-height: 500px;
 		background-attachment: scroll;
 		background-position: center center;
-		background-size: cover;
+		background-size: contain;
+		background-repeat: no-repeat;
 	}
 	
 	.hero-wrap .slider-text {
-		height: 100vh;
-		min-height: 600px;
+		height: 80vh;
+		min-height: 500px;
 	}
 	
 	.hero-wrap .slider-text h1,
@@ -2443,6 +2444,14 @@ h5,
 	
 	.hero-wrap .slider-text .text {
 		padding: 20px 0;
+	}
+	
+	.hero-wrap .slider-text .btn {
+		display: none !important;
+	}
+	
+	.hero-wrap .slider-text p:last-child {
+		display: none !important;
 	}
 }
 
@@ -2461,11 +2470,14 @@ h5,
 @media (max-width: 575.98px) {
 
 	.hero-wrap {
-		min-height: 500px;
+		height: 70vh
+		min-height: 450px;
+		background-size: contain;
 	}
 	
 	.hero-wrap .slider-text {
-		min-height: 500px;
+		height: 70vh;
+		min-height: 450px;
 	}
 
 	.hero-wrap .slider-text h1,
@@ -2474,11 +2486,13 @@ h5,
 		line-height: 1.3;
 	}
 	
+/*
 	.hero-wrap .slider-text .btn {
 		width: 100%;
 		display: block;
 		margin-bottom: 5px;
 	}
+*/
 }
 
 .hero-wrap .slider-text .breadcrumbs {
