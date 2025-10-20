@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultrasound Procedure Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Ultrasound Procedure Tracker</h1>
+            <p class="subtitle">Mount Sinai Fertility - Monthly Reporting</p>
+        </div>
+
+        <div class="card">
+            <h2>Add New Entry</h2>
+            
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="entryDate">Date</label>
+                    <input type="date" id="entryDate">
+                </div>
+                
+                <div class="form-group">
+                    <label for="procedureType">Procedure Type</label>
+                    <select id="procedureType">
+                        <option value="1">Sonohyst for tubes + uterus</option>
+                        <option value="2">Sonohyst for cavity only</option>
+                        <option value="3">AFC GYN scan</option>
+                        <option value="4">OB US low risk</option>
+                        <option value="5">OB US high risk</option>
+                        <option value="6">IC monitoring</option>
+                        <option value="7">MVA Ultrasound guidance</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="patientName">Patient Name</label>
+                    <input type="text" id="patientName" placeholder="FIRST M. LAST">
+                </div>
+                
+                <div class="form-group">
+                    <label for="patientId">Patient ID</label>
+                    <input type="text" id="patientId" placeholder="123456">
+                </div>
+            </div>
+            
+            <button class="btn-primary" onclick="addEntry()">
+                <span>➕</span>
+                Add Entry
+            </button>
+        </div>
+
+        <div class="card">
+            <h2>Entries (<span id="entryCount">0</span>)</h2>
+            
+            <div id="entriesContainer">
+                <div class="empty-state">
+                    No entries yet. Add your first procedure above.
+                </div>
+            </div>
+        </div>
+
+        <div class="button-grid">
+            <button class="btn-success" onclick="generateEmail()" id="emailBtn" disabled>
+                <span>✉️</span>
+                Generate Email Summary
+            </button>
+            
+            <button class="btn-info" onclick="generateMonthlyReport()" id="reportBtn" disabled>
+                <span>📄</span>
+                Generate Monthly Report (CSV)
+            </button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
