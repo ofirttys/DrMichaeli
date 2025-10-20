@@ -142,7 +142,7 @@ function generateEmailHome() {
         });
     });
 
-    emailBody += '\n--------\n\n';
+    emailBody += '\n';
     emailBody += 'Best regards,\n\n';
     emailBody += 'Jennia Michaeli,\n';
     emailBody += 'MD, ObGyn, REI\n';
@@ -217,7 +217,6 @@ objMail.Display`;
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
     
-    alert('VBS script downloaded! Double-click the file to open Outlook with the pre-filled email.');
 }
 
 // Generate monthly report CSV
