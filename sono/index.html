@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="card">
+        <div class="card header-card">
             <h1>Ultrasound Procedure Tracker</h1>
             <p class="subtitle">Mount Sinai Fertility - Monthly Reporting</p>
         </div>
@@ -62,21 +62,30 @@
             </div>
         </div>
 
-        <div class="button-grid">
-            <button class="btn-success" onclick="generateEmailHome()" id="emailHomeBtn" disabled>
-                <span>✉️</span>
-                Generate Email Summary (Home)
-            </button>
+        <div class="buttons-container">
+            <div class="button-grid">
+                <button class="btn-success" onclick="generateEmailHome()" id="emailHomeBtn" disabled>
+                    <span>✉️</span>
+                    <span>Generate Email Summary (Home)</span>
+                </button>
+                
+                <button class="btn-primary" onclick="generateEmailOffice()" id="emailOfficeBtn" disabled>
+                    <span>📧</span>
+                    <span>Generate Email (Office)</span>
+                </button>
+                
+                <button class="btn-danger-solid" onclick="clearAllData()" id="clearBtn">
+                    <span>🗑️</span>
+                    <span>Clear All Data</span>
+                </button>
+            </div>
             
-            <button class="btn-primary" onclick="generateEmailOffice()" id="emailOfficeBtn" disabled>
-                <span>📧</span>
-                Generate Email (Office)
-            </button>
-            
-            <button class="btn-info" onclick="showMonthPicker()" id="reportBtn" disabled>
-                <span>📄</span>
-                Generate Monthly Report (CSV)
-            </button>
+            <div class="button-row-single">
+                <button class="btn-info" onclick="showMonthPicker()" id="reportBtn" disabled>
+                    <span>📄</span>
+                    <span>Generate Monthly Report (CSV)</span>
+                </button>
+            </div>
         </div>
     </div>
 
