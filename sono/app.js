@@ -16,6 +16,12 @@ let entries = [];
 document.addEventListener('DOMContentLoaded', function() {
     // Set today's date as default
     document.getElementById('entryDate').valueAsDate = new Date();
+    
+    // Set current month as default for report
+    const now = new Date();
+    const currentMonth = now.toISOString().slice(0, 7); // Format: YYYY-MM
+    document.getElementById('reportMonth').value = currentMonth;
+    
     updateDisplay();
 });
 
@@ -217,15 +223,37 @@ objMail.Display`;
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
     
+    
+}
+
+// Show month picker modal
+function showMonthPicker() {
+    document.getElementById('monthPickerModal').classList.add('show');
+}
+
+// Close month picker modal
+function closeMonthPicker() {
+    document.getElementById('monthPickerModal').classList.remove('show');
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('monthPickerModal');
+    if (event.target === modal) {
+        closeMonthPicker();
+    }
 }
 
 // Generate monthly report CSV
 function generateMonthlyReport() {
-    const month = prompt('Enter month (1-12):');
-    const year = prompt('Enter year (YYYY):');
+    const monthInput = document.getElementById('reportMonth').value;
     
-    if (!month || !year) return;
+    if (!monthInput) {
+        alert('Please select a month and year');
+        return;
+    }
     
+    const [year, month] = monthInput.split('-');
     const monthNum = parseInt(month);
     const yearNum = parseInt(year);
     
@@ -235,7 +263,7 @@ function generateMonthlyReport() {
     });
 
     if (filtered.length === 0) {
-        alert(`No entries found for ${month}/${year}`);
+        alert(`No entries found for ${monthNum}/${yearNum}`);
         return;
     }
 
@@ -261,20 +289,23 @@ function generateMonthlyReport() {
 
     Object.values(groupedByDateAndProc).forEach(item => {
         const proc = procedures.find(p => p.id === item.procedureId);
-        csv += `${item.date},"${proc.name}",${proc.code},${item.count},$${proc.price.toFixed(2)},$${item.total.toFixed(2)}\n`;
+        csv += `${item.date},"${proc.name}",${proc.code},${item.count},${proc.price.toFixed(2)},${item.total.toFixed(2)}\n`;
         grandTotal += item.total;
     });
 
-    csv += `\n,,,,,TOTAL: $${grandTotal.toFixed(2)}`;
+    csv += `\n,,,,,TOTAL: ${grandTotal.toFixed(2)}`;
 
     // Download CSV
     const blob = new Blob([csv], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `invoice_${year}_${month.padStart(2, '0')}.csv`;
+    a.download = `invoice_${yearNum}_${month.padStart(2, '0')}.csv`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
+    
+    // Close the modal
+    closeMonthPicker();
 }

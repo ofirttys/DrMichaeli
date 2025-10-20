@@ -73,10 +73,28 @@
                 Generate Email (Office)
             </button>
             
-            <button class="btn-info" onclick="generateMonthlyReport()" id="reportBtn" disabled>
+            <button class="btn-info" onclick="showMonthPicker()" id="reportBtn" disabled>
                 <span>📄</span>
                 Generate Monthly Report (CSV)
             </button>
+        </div>
+    </div>
+
+    <!-- Modal for Month/Year Selection -->
+    <div id="monthPickerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Select Month for Report</h3>
+                <button class="close-btn" onclick="closeMonthPicker()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <label for="reportMonth">Month and Year:</label>
+                <input type="month" id="reportMonth" class="month-input">
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeMonthPicker()">Cancel</button>
+                <button class="btn-info" onclick="generateMonthlyReport()">Generate Report</button>
+            </div>
         </div>
     </div>
 
