@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Set current month as default for report
     const now = new Date();
-    const currentMonth = now.toISOString().slice(0, 7); // Format: YYYY-MM
+    const currentMonth = now.toISOString().slice(0, 7);
     document.getElementById('reportMonth').value = currentMonth;
     
     updateDisplay();
@@ -156,7 +156,6 @@ function generateEmailHome() {
     navigator.clipboard.writeText(emailBody).then(() => {
         alert('Email content copied to clipboard! Paste it into your email client.');
     }).catch(() => {
-        // Fallback: show in prompt if clipboard fails
         prompt('Copy this email content:', emailBody);
     });
 }
@@ -196,7 +195,6 @@ function generateEmailOffice() {
         });
     });
 
-    // Escape double quotes for VBS
     const escapedContent = emailContent.replace(/"/g, '""');
 
     const vbsScript = `Set objOutlook = CreateObject("Outlook.Application")
@@ -211,7 +209,6 @@ existingHTML = objMail.HTMLBody
 objMail.HTMLBody = "${escapedContent}" & existingHTML
 objMail.Display`;
 
-    // Download VBS file
     const blob = new Blob([vbsScript], { type: 'text/plain' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -222,7 +219,19 @@ objMail.Display`;
     a.click();
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
+}
+
+// Clear all data
+function clearAllData() {
+    if (entries.length === 0) {
+        alert('No data to clear.');
+        return;
+    }
     
+    if (confirm('Are you sure you want to clear all entries? This action cannot be undone.')) {
+        entries = [];
+        updateDisplay();
+    }
 }
 
 // Show month picker modal
@@ -288,13 +297,12 @@ function generateMonthlyReport() {
 
     Object.values(groupedByDateAndProc).forEach(item => {
         const proc = procedures.find(p => p.id === item.procedureId);
-        csv += `${item.date},"${proc.name}",${proc.code},${item.count},${proc.price.toFixed(2)},${item.total.toFixed(2)}\n`;
+        csv += `${item.date},"${proc.name}",${proc.code},${item.count},$${proc.price.toFixed(2)},$${item.total.toFixed(2)}\n`;
         grandTotal += item.total;
     });
 
-    csv += `\n,,,,,TOTAL: ${grandTotal.toFixed(2)}`;
+    csv += `\n,,,,,TOTAL: $${grandTotal.toFixed(2)}`;
 
-    // Download CSV
     const blob = new Blob([csv], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -305,6 +313,5 @@ function generateMonthlyReport() {
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
     
-    // Close the modal
     closeMonthPicker();
 }
