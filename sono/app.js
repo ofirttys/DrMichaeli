@@ -130,9 +130,14 @@ function generateEmailHome() {
         groupedByDate[entry.date][entry.procedureId].push(entry);
     });
 
-    let emailBody = '';
-    
     const dates = Object.keys(groupedByDate).sort();
+    const dateStr = dates.length === 1 
+        ? new Date(dates[0] + 'T12:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+        : 'Multiple Dates';
+    
+    let emailBody = '';
+    emailBody += 'Jessop, Stephanie <Stephanie.Jessop@sinaihealth.ca>\n';
+    emailBody += `Sono reports - Jennia Michaeli ${dateStr}\n\n`;
     
     dates.forEach(date => {
         const formattedDate = new Date(date + 'T12:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -201,7 +206,7 @@ function generateEmailOffice() {
 Set objMail = objOutlook.CreateItem(0)
 objMail.Subject = "Sono reports - Jennia Michaeli ${dateStr}"
 objMail.BodyFormat = 2
-objMail.TO = "Jessop, Stephanie; Dr.Michaelis office; Padar, Michelle"
+objMail.TO = "Jessop, Stephanie <Stephanie.Jessop@sinaihealth.ca>"
 objMail.CC = "Michaeli, Jennia <Jennia.Michaeli@sinaihealth.ca>"
 objMail.GetInspector
 Dim existingHTML
