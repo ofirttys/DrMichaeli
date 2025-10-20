@@ -223,7 +223,6 @@ objMail.Display`;
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
     
-    
 }
 
 // Show month picker modal
