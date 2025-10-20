@@ -147,7 +147,7 @@ function generateEmailHome() {
             const proc = procedures.find(p => p.id === parseInt(procId));
             emailBody += `${proc.name}:\n`;
             procEntries.forEach(entry => {
-                emailBody += `${entry.patientName} PID: ${entry.patientId}\n`;
+                emailBody += `${entry.patientName}, PID: ${entry.patientId}\n`;
             });
             emailBody += '\n';
         });
@@ -194,7 +194,7 @@ function generateEmailOffice() {
             const proc = procedures.find(p => p.id === parseInt(procId));
             emailContent += `<p><strong>${proc.name}:</strong><br>`;
             procEntries.forEach(entry => {
-                emailContent += `${entry.patientName} PID: ${entry.patientId}<br>`;
+                emailContent += `${entry.patientName}, PID: ${entry.patientId}<br>`;
             });
             emailContent += '</p>';
         });
