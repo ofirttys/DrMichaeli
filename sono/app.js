@@ -57,11 +57,13 @@ function removeEntry(id) {
 function updateDisplay() {
     const container = document.getElementById('entriesContainer');
     const countSpan = document.getElementById('entryCount');
-    const emailBtn = document.getElementById('emailBtn');
+    const emailHomeBtn = document.getElementById('emailHomeBtn');
+    const emailOfficeBtn = document.getElementById('emailOfficeBtn');
     const reportBtn = document.getElementById('reportBtn');
 
     countSpan.textContent = entries.length;
-    emailBtn.disabled = entries.length === 0;
+    emailHomeBtn.disabled = entries.length === 0;
+    emailOfficeBtn.disabled = entries.length === 0;
     reportBtn.disabled = entries.length === 0;
 
     if (entries.length === 0) {
@@ -108,8 +110,8 @@ function updateDisplay() {
     container.innerHTML = html;
 }
 
-// Generate email summary
-function generateEmail() {
+// Generate email summary for home (content only with signature)
+function generateEmailHome() {
     const groupedByDate = {};
 
     entries.forEach(entry => {
@@ -122,18 +124,9 @@ function generateEmail() {
         groupedByDate[entry.date][entry.procedureId].push(entry);
     });
 
-    let emailBody = 'From: Michaeli, Jennia\n';
-    
-    const now = new Date();
-    const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    emailBody += `Sent: ${now.toLocaleDateString('en-US', dateOptions)}\n`;
-    emailBody += 'To: Jessop, Stephanie; Dr.Michaelis office; Padar, Michelle\n';
+    let emailBody = '';
     
     const dates = Object.keys(groupedByDate).sort();
-    const dateStr = dates.length === 1 
-        ? new Date(dates[0] + 'T12:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
-        : 'Multiple Dates';
-    emailBody += `Subject: Sono reports- Jennia Michaeli ${dateStr}\n\n`;
     
     dates.forEach(date => {
         const formattedDate = new Date(date + 'T12:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -149,12 +142,82 @@ function generateEmail() {
         });
     });
 
+    emailBody += '\n--------\n\n';
+    emailBody += 'Best regards,\n\n';
+    emailBody += 'Jennia Michaeli,\n';
+    emailBody += 'MD, ObGyn, REI\n';
+
     navigator.clipboard.writeText(emailBody).then(() => {
         alert('Email content copied to clipboard! Paste it into your email client.');
     }).catch(() => {
         // Fallback: show in prompt if clipboard fails
         prompt('Copy this email content:', emailBody);
     });
+}
+
+// Generate email for office (VBS script download)
+function generateEmailOffice() {
+    const groupedByDate = {};
+
+    entries.forEach(entry => {
+        if (!groupedByDate[entry.date]) {
+            groupedByDate[entry.date] = {};
+        }
+        if (!groupedByDate[entry.date][entry.procedureId]) {
+            groupedByDate[entry.date][entry.procedureId] = [];
+        }
+        groupedByDate[entry.date][entry.procedureId].push(entry);
+    });
+
+    let emailContent = '';
+    
+    const dates = Object.keys(groupedByDate).sort();
+    const dateStr = dates.length === 1 
+        ? new Date(dates[0] + 'T12:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+        : 'Multiple Dates';
+    
+    dates.forEach(date => {
+        const formattedDate = new Date(date + 'T12:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        emailContent += `<p>Hello Steph, I performed and reported the following ultrasounds on ${formattedDate}:</p>`;
+        
+        Object.entries(groupedByDate[date]).forEach(([procId, procEntries]) => {
+            const proc = procedures.find(p => p.id === parseInt(procId));
+            emailContent += `<p><strong>${proc.name}:</strong><br>`;
+            procEntries.forEach(entry => {
+                emailContent += `${entry.patientName} PID: ${entry.patientId}<br>`;
+            });
+            emailContent += '</p>';
+        });
+    });
+
+    // Escape double quotes for VBS
+    const escapedContent = emailContent.replace(/"/g, '""');
+
+    const vbsScript = `Set objOutlook = CreateObject("Outlook.Application")
+Set objMail = objOutlook.CreateItem(0)
+objMail.Subject = "Sono reports - Jennia Michaeli ${dateStr}"
+objMail.BodyFormat = 2
+objMail.TO = "Jessop, Stephanie; Dr.Michaelis office; Padar, Michelle"
+objMail.CC = "Michaeli, Jennia <Jennia.Michaeli@sinaihealth.ca>"
+objMail.GetInspector
+Dim existingHTML
+existingHTML = objMail.HTMLBody
+objMail.HTMLBody = "${escapedContent}" & existingHTML
+objMail.Display`;
+
+    // Download VBS file
+    const blob = new Blob([vbsScript], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    const fileName = `sono_report_${new Date().toISOString().split('T')[0]}.vbs`;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+    
+    alert('VBS script downloaded! Double-click the file to open Outlook with the pre-filled email.');
 }
 
 // Generate monthly report CSV
