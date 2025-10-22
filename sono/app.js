@@ -353,12 +353,17 @@ async function generateMonthlyReport() {
         
         const result = await response.json();
         
+        console.log('Response from Google Sheets:', result);
+        
         if (!result.success) {
             alert('Error fetching data: ' + result.message);
             return;
         }
         
         const monthlyData = result.data;
+        
+        console.log('Monthly data received:', monthlyData);
+        console.log('Number of entries:', monthlyData.length);
         
         if (monthlyData.length === 0) {
             alert(`No entries found for ${monthNum}/${yearNum}`);
@@ -369,8 +374,14 @@ async function generateMonthlyReport() {
         const groupedByDateAndProc = {};
         
         monthlyData.forEach(entry => {
+            console.log('Processing entry:', entry);
             const proc = procedures.find(p => p.name === entry.procedureType);
-            if (!proc) return; // Skip if procedure not found
+            console.log('Found procedure:', proc);
+            
+            if (!proc) {
+                console.log('WARNING: Procedure not found for:', entry.procedureType);
+                return; // Skip if procedure not found
+            }
             
             const key = `${entry.date}_${proc.id}`;
             if (!groupedByDateAndProc[key]) {
