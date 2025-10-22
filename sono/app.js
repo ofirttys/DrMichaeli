@@ -1,3 +1,4 @@
+
 // Procedure definitions
 const procedures = [
     { id: 1, name: 'Sonohyst for tubes + uterus', code: 'J476', price: 31.50 },
@@ -9,8 +10,8 @@ const procedures = [
     { id: 7, name: 'MVA Ultrasound guidance', code: 'J149', price: 37.90 }
 ];
 
-// Google Apps Script URL - UPDATE THIS WITH YOUR DEPLOYED WEB APP URL
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxFL3nQA4AiOJCtZ6HSqTxXZrok6-R1rvuUz5_92UmDhYTFVaBLVoadNFEfovD-OVkmYA/exec';
+// Google Apps Script URL
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhwOgDQ0nHGR2PS1NhdEz_tQMDVoEsa5ao8haMueZbzRbiFN9TVoY_UXgtF9GJl_fNOg/exec';
 
 // Data storage
 let entries = [];
@@ -195,9 +196,13 @@ async function generateEmailHome() {
     emailBody += 'Jessop, Stephanie <Stephanie.Jessop@sinaihealth.ca>\n';
     emailBody += `Sono reports - Jennia Michaeli ${dateStr}\n\n`;
     
-    dates.forEach(date => {
+    dates.forEach((date, index) => {
         const formattedDate = new Date(date + 'T12:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-        emailBody += `Hello Steph, I performed and reported the following ultrasounds on ${formattedDate}:\n\n`;
+        if (index === 0) {
+            emailBody += `Hello Steph, I performed and reported the following ultrasounds on ${formattedDate}:\n\n`;
+        } else {
+            emailBody += `I also performed and reported the following ultrasounds on ${formattedDate}:\n\n`;
+        }
         
         Object.entries(groupedByDate[date]).forEach(([procId, procEntries]) => {
             const proc = procedures.find(p => p.id === parseInt(procId));
@@ -250,9 +255,13 @@ async function generateEmailOffice() {
         ? new Date(dates[0] + 'T12:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
         : 'Multiple Dates';
     
-    dates.forEach(date => {
+    dates.forEach((date, index) => {
         const formattedDate = new Date(date + 'T12:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-        emailContent += `<p>Hello Steph, I performed and reported the following ultrasounds on ${formattedDate}:</p>`;
+        if (index === 0) {
+            emailContent += `<p>Hello Steph, I performed and reported the following ultrasounds on ${formattedDate}:</p>`;
+        } else {
+            emailContent += `<p>I also performed and reported the following ultrasounds on ${formattedDate}:</p>`;
+        }
         
         Object.entries(groupedByDate[date]).forEach(([procId, procEntries]) => {
             const proc = procedures.find(p => p.id === parseInt(procId));
@@ -323,8 +332,8 @@ window.onclick = function(event) {
     }
 }
 
-// Generate monthly report CSV
-async function generateMonthlyReport() {
+// Generate monthly report - CSV or PDF
+async function generateMonthlyReport(format = 'csv') {
     const monthInput = document.getElementById('reportMonth').value;
     
     if (!monthInput) {
@@ -335,6 +344,63 @@ async function generateMonthlyReport() {
     const [year, month] = monthInput.split('-');
     const monthNum = parseInt(month);
     const yearNum = parseInt(year);
+    
+    if (format === 'pdf') {
+        // Generate PDF invoice
+        await generatePdfInvoice(yearNum, monthNum);
+    } else {
+        // Generate CSV
+        await generateCsvReport(yearNum, monthNum);
+    }
+}
+
+// Generate PDF Invoice
+async function generatePdfInvoice(year, month) {
+    try {
+        const formData = new URLSearchParams();
+        formData.append('action', 'generate_pdf_invoice');
+        formData.append('year', year);
+        formData.append('month', month);
+        
+        const response = await fetch(SCRIPT_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: formData.toString()
+        });
+        
+        const result = await response.json();
+        
+        if (!result.success) {
+            alert('Error generating PDF: ' + result.message);
+            return;
+        }
+        
+        // Open the PDF in a new tab
+        window.open(result.fileUrl, '_blank');
+        
+        closeMonthPicker();
+        alert('PDF invoice generated! Opening in new tab.');
+        
+    } catch (error) {
+        console.error('Error generating PDF:', error);
+        alert('Error generating PDF: ' + error.message);
+    }
+}
+
+// Generate CSV Report
+async function generateCsvReport(year, month) {
+    const monthInput = document.getElementById('reportMonth').value;
+    
+    if (!monthInput) {
+        alert('Please select a month and year');
+        return;
+    }
+    
+    const [yearStr, monthStr] = monthInput.split('-');
+    const monthNum = parseInt(monthStr);
+    const yearNum = parseInt(yearStr);
     
     // Fetch data from Google Sheets
     try {
