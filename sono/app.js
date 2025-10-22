@@ -478,7 +478,7 @@ async function generateCsvReport(year, month) {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `invoice_${yearNum}_${monthStr.padStart(2, '0')}.csv`;
+        a.download = `procedures_invoice_${yearNum}_${monthStr.padStart(2, '0')}.csv`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
