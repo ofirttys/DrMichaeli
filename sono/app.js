@@ -118,8 +118,7 @@ function updateDisplay() {
 
 // Helper function to send data to Google Sheets
 async function sendToGoogleSheets(entries) {
-    // UPDATE THIS URL WITH YOUR DEPLOYED WEB APP URL
-    const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzyzA63my-M8DX10b8W6Tuml7IhfjHsUBZtuN7Qjq5cXjoFCpuT2GmnMKADw474lNWpWA/exec';
     
     // Prepare data
     const dataToSend = entries.map(entry => {
