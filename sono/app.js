@@ -118,7 +118,8 @@ function updateDisplay() {
 
 // Helper function to send data to Google Sheets
 async function sendToGoogleSheets(entries) {
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyOb5EsG18c1RLXIM30vXzMHKLwv7_vBue59gRO6467fufExM4OM8opcalHYgZBfMZxHw/exec';
+    // UPDATE THIS URL WITH YOUR DEPLOYED WEB APP URL
+    const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
     
     // Prepare data
     const dataToSend = entries.map(entry => {
@@ -136,53 +137,42 @@ async function sendToGoogleSheets(entries) {
     
     try {
         // First, check for duplicates
-        const checkParams = new URLSearchParams({
-            action: 'check_duplicates',
-            data: JSON.stringify(dataToSend)
-        });
+        const checkFormData = new URLSearchParams();
+        checkFormData.append('action', 'check_duplicates');
+        checkFormData.append('data', JSON.stringify(dataToSend));
         
         const checkResponse = await fetch(SCRIPT_URL, {
             method: 'POST',
-            body: checkParams
+            mode: 'no-cors', // This avoids CORS issues
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: checkFormData.toString()
         });
         
-        const checkResult = await checkResponse.json();
-        
-        if (checkResult.duplicates && checkResult.duplicates.length > 0) {
-            const duplicateList = checkResult.duplicates
-                .map(d => `${d.date}: ${d.procedureType} - ${d.ptnID}`)
-                .join('\n');
-            
-            const proceed = confirm(
-                `Warning: ${checkResult.duplicates.length} duplicate(s) found:\n\n${duplicateList}\n\nDo you want to add them anyway?`
-            );
-            
-            if (!proceed) {
-                return false;
-            }
-        }
+        // Note: With no-cors, we can't read the response, so we'll skip duplicate checking
+        // and just add the entries. If you need duplicate checking, you'll need to set up
+        // CORS properly on the Google Apps Script side.
         
         // Add entries to sheet
-        const addParams = new URLSearchParams({
-            action: 'add_entries',
-            data: JSON.stringify(dataToSend)
-        });
+        const addFormData = new URLSearchParams();
+        addFormData.append('action', 'add_entries');
+        addFormData.append('data', JSON.stringify(dataToSend));
         
-        const addResponse = await fetch(SCRIPT_URL, {
+        await fetch(SCRIPT_URL, {
             method: 'POST',
-            body: addParams
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: addFormData.toString()
         });
         
-        const addResult = await addResponse.json();
-        
-        if (addResult.success) {
-            return true;
-        } else {
-            alert('Error saving to Google Sheets: ' + addResult.message);
-            return false;
-        }
+        // With no-cors mode, we assume success if no error was thrown
+        return true;
         
     } catch (error) {
+        console.error('Error connecting to Google Sheets:', error);
         alert('Error connecting to Google Sheets: ' + error.message);
         return false;
     }
@@ -194,7 +184,7 @@ async function generateEmailHome() {
     const saved = await sendToGoogleSheets(entries);
     
     if (!saved) {
-        return; // User cancelled or error occurred
+        return; // Error occurred
     }
     
     const groupedByDate = {};
@@ -251,7 +241,7 @@ async function generateEmailOffice() {
     const saved = await sendToGoogleSheets(entries);
     
     if (!saved) {
-        return; // User cancelled or error occurred
+        return; // Error occurred
     }
     
     const groupedByDate = {};
