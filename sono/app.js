@@ -10,7 +10,7 @@ const procedures = [
 ];
 
 // Google Apps Script URL - UPDATE THIS WITH YOUR DEPLOYED WEB APP URL
-const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxFL3nQA4AiOJCtZ6HSqTxXZrok6-R1rvuUz5_92UmDhYTFVaBLVoadNFEfovD-OVkmYA/exec';
 
 // Data storage
 let entries = [];
