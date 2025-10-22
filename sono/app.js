@@ -116,8 +116,85 @@ function updateDisplay() {
     container.innerHTML = html;
 }
 
+// Helper function to send data to Google Sheets
+async function sendToGoogleSheets(entries) {
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby33WXDb2_RopsxrWhHRyG2M4RfhV93RpjPyQAvtRT3sQLQ87nJBj10ewgwsGfCK3lewg/exec';
+    
+    // Prepare data
+    const dataToSend = entries.map(entry => {
+        const proc = procedures.find(p => p.id === entry.procedureId);
+        // Extract initials from patient name
+        const nameParts = entry.patientName.trim().split(' ');
+        const initials = nameParts.map(part => part.charAt(0).toUpperCase()).join('');
+        
+        return {
+            date: entry.date,
+            procedureType: proc.name,
+            ptnID: `${initials}-${entry.patientId}`
+        };
+    });
+    
+    try {
+        // First, check for duplicates
+        const checkResponse = await fetch(SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                action: 'check_duplicates',
+                entries: dataToSend
+            })
+        });
+        
+        const checkResult = await checkResponse.json();
+        
+        if (checkResult.duplicates && checkResult.duplicates.length > 0) {
+            const duplicateList = checkResult.duplicates
+                .map(d => `${d.date}: ${d.procedureType} - ${d.ptnID}`)
+                .join('\n');
+            
+            const proceed = confirm(
+                `Warning: ${checkResult.duplicates.length} duplicate(s) found:\n\n${duplicateList}\n\nDo you want to add them anyway?`
+            );
+            
+            if (!proceed) {
+                return false;
+            }
+        }
+        
+        // Add entries to sheet
+        const addResponse = await fetch(SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                action: 'add_entries',
+                entries: dataToSend
+            })
+        });
+        
+        const addResult = await addResponse.json();
+        
+        if (addResult.success) {
+            return true;
+        } else {
+            alert('Error saving to Google Sheets: ' + addResult.message);
+            return false;
+        }
+        
+    } catch (error) {
+        alert('Error connecting to Google Sheets: ' + error.message);
+        return false;
+    }
+}
+
 // Generate email summary for home (content only with signature)
-function generateEmailHome() {
+async function generateEmailHome() {
+    // Send to Google Sheets first
+    const saved = await sendToGoogleSheets(entries);
+    
+    if (!saved) {
+        return; // User cancelled or error occurred
+    }
+    
     const groupedByDate = {};
 
     entries.forEach(entry => {
@@ -159,14 +236,22 @@ function generateEmailHome() {
     emailBody += 'MD, ObGyn, REI\n';
 
     navigator.clipboard.writeText(emailBody).then(() => {
-        alert('Email content copied to clipboard! Paste it into your email client.');
+        alert('Data saved to Google Sheets!\n\nEmail content copied to clipboard! Paste it into your email client.');
     }).catch(() => {
+        alert('Data saved to Google Sheets!\n\nCopy this email content:');
         prompt('Copy this email content:', emailBody);
     });
 }
 
 // Generate email for office (VBS script download)
-function generateEmailOffice() {
+async function generateEmailOffice() {
+    // Send to Google Sheets first
+    const saved = await sendToGoogleSheets(entries);
+    
+    if (!saved) {
+        return; // User cancelled or error occurred
+    }
+    
     const groupedByDate = {};
 
     entries.forEach(entry => {
@@ -224,6 +309,8 @@ objMail.Display`;
     a.click();
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
+    
+    alert('Data saved to Google Sheets!\n\nVBS script downloaded.');
 }
 
 // Clear all data
