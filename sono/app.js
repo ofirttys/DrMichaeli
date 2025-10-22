@@ -138,7 +138,6 @@ async function sendToGoogleSheets(entries) {
         // First, check for duplicates
         const checkResponse = await fetch(SCRIPT_URL, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 action: 'check_duplicates',
                 entries: dataToSend
@@ -164,7 +163,6 @@ async function sendToGoogleSheets(entries) {
         // Add entries to sheet
         const addResponse = await fetch(SCRIPT_URL, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 action: 'add_entries',
                 entries: dataToSend
