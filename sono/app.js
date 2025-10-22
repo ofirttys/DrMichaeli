@@ -118,7 +118,7 @@ function updateDisplay() {
 
 // Helper function to send data to Google Sheets
 async function sendToGoogleSheets(entries) {
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby33WXDb2_RopsxrWhHRyG2M4RfhV93RpjPyQAvtRT3sQLQ87nJBj10ewgwsGfCK3lewg/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyKZ3XABzdvt16MN-JtY6voK36gwOVonYOCSfttf4RL-Z-xA1JcF-capy5gCCCTRHZGPg/exec';
     
     // Prepare data
     const dataToSend = entries.map(entry => {
