@@ -9,6 +9,9 @@ const procedures = [
     { id: 7, name: 'MVA Ultrasound guidance', code: 'J149', price: 37.90 }
 ];
 
+// Google Apps Script URL - UPDATE THIS WITH YOUR DEPLOYED WEB APP URL
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw-r_FGSZPHY2VydwBFZMIIZYNyUTFTxDT4OWsCRWkif24vckSWsndWmJ6DbGml_1hUcA/exec';
+
 // Data storage
 let entries = [];
 
@@ -70,7 +73,7 @@ function updateDisplay() {
     countSpan.textContent = entries.length;
     emailHomeBtn.disabled = entries.length === 0;
     emailOfficeBtn.disabled = entries.length === 0;
-    reportBtn.disabled = entries.length === 0;
+    // Report button is always enabled - it pulls from Google Sheets
 
     if (entries.length === 0) {
         container.innerHTML = '<div class="empty-state">No entries yet. Add your first procedure above.</div>';
@@ -118,9 +121,6 @@ function updateDisplay() {
 
 // Helper function to send data to Google Sheets
 async function sendToGoogleSheets(entries) {
-    
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzyzA63my-M8DX10b8W6Tuml7IhfjHsUBZtuN7Qjq5cXjoFCpuT2GmnMKADw474lNWpWA/exec';
-    
     // Prepare data
     const dataToSend = entries.map(entry => {
         const proc = procedures.find(p => p.id === entry.procedureId);
@@ -324,7 +324,7 @@ window.onclick = function(event) {
 }
 
 // Generate monthly report CSV
-function generateMonthlyReport() {
+async function generateMonthlyReport() {
     const monthInput = document.getElementById('reportMonth').value;
     
     if (!monthInput) {
@@ -336,53 +336,80 @@ function generateMonthlyReport() {
     const monthNum = parseInt(month);
     const yearNum = parseInt(year);
     
-    const filtered = entries.filter(e => {
-        const entryDate = new Date(e.date + 'T12:00:00');
-        return entryDate.getMonth() + 1 === monthNum && entryDate.getFullYear() === yearNum;
-    });
-
-    if (filtered.length === 0) {
-        alert(`No entries found for ${monthNum}/${yearNum}`);
-        return;
-    }
-
-    const groupedByDateAndProc = {};
-    
-    filtered.forEach(entry => {
-        const key = `${entry.date}_${entry.procedureId}`;
-        if (!groupedByDateAndProc[key]) {
-            groupedByDateAndProc[key] = {
-                date: entry.date,
-                procedureId: entry.procedureId,
-                count: 0,
-                total: 0
-            };
+    // Fetch data from Google Sheets
+    try {
+        const formData = new URLSearchParams();
+        formData.append('action', 'get_monthly_data');
+        formData.append('year', yearNum);
+        formData.append('month', monthNum);
+        
+        const response = await fetch(SCRIPT_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: formData.toString()
+        });
+        
+        const result = await response.json();
+        
+        if (!result.success) {
+            alert('Error fetching data: ' + result.message);
+            return;
         }
-        groupedByDateAndProc[key].count++;
-        const proc = procedures.find(p => p.id === entry.procedureId);
-        groupedByDateAndProc[key].total += proc.price;
-    });
+        
+        const monthlyData = result.data;
+        
+        if (monthlyData.length === 0) {
+            alert(`No entries found for ${monthNum}/${yearNum}`);
+            return;
+        }
+        
+        // Group by date and procedure
+        const groupedByDateAndProc = {};
+        
+        monthlyData.forEach(entry => {
+            const proc = procedures.find(p => p.name === entry.procedureType);
+            if (!proc) return; // Skip if procedure not found
+            
+            const key = `${entry.date}_${proc.id}`;
+            if (!groupedByDateAndProc[key]) {
+                groupedByDateAndProc[key] = {
+                    date: entry.date,
+                    procedureId: proc.id,
+                    count: 0,
+                    total: 0
+                };
+            }
+            groupedByDateAndProc[key].count++;
+            groupedByDateAndProc[key].total += proc.price;
+        });
 
-    let csv = 'Date,Procedure,Code,Count,Unit Price,Total\n';
-    let grandTotal = 0;
+        let csv = 'Date,Procedure,Code,Count,Unit Price,Total\n';
+        let grandTotal = 0;
 
-    Object.values(groupedByDateAndProc).forEach(item => {
-        const proc = procedures.find(p => p.id === item.procedureId);
-        csv += `${item.date},"${proc.name}",${proc.code},${item.count},$${proc.price.toFixed(2)},$${item.total.toFixed(2)}\n`;
-        grandTotal += item.total;
-    });
+        Object.values(groupedByDateAndProc).forEach(item => {
+            const proc = procedures.find(p => p.id === item.procedureId);
+            csv += `${item.date},"${proc.name}",${proc.code},${item.count},$${proc.price.toFixed(2)},$${item.total.toFixed(2)}\n`;
+            grandTotal += item.total;
+        });
 
-    csv += `\n,,,,,TOTAL: $${grandTotal.toFixed(2)}`;
+        csv += `\n,,,,,TOTAL: $${grandTotal.toFixed(2)}`;
 
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `invoice_${yearNum}_${month.padStart(2, '0')}.csv`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
-    
-    closeMonthPicker();
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `invoice_${yearNum}_${month.padStart(2, '0')}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+        
+        closeMonthPicker();
+        
+    } catch (error) {
+        console.error('Error generating report:', error);
+        alert('Error generating report: ' + error.message);
+    }
 }
