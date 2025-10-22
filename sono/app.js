@@ -1,4 +1,3 @@
-
 // Procedure definitions
 const procedures = [
     { id: 1, name: 'Sonohyst for tubes + uterus', code: 'J476', price: 31.50 },
@@ -479,7 +478,7 @@ async function generateCsvReport(year, month) {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `invoice_${yearNum}_${month.padStart(2, '0')}.csv`;
+        a.download = `invoice_${yearNum}_${monthStr.padStart(2, '0')}.csv`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
