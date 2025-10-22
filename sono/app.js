@@ -10,7 +10,7 @@ const procedures = [
 ];
 
 // Google Apps Script URL - UPDATE THIS WITH YOUR DEPLOYED WEB APP URL
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw-r_FGSZPHY2VydwBFZMIIZYNyUTFTxDT4OWsCRWkif24vckSWsndWmJ6DbGml_1hUcA/exec';
+const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
 
 // Data storage
 let entries = [];
@@ -130,7 +130,7 @@ async function sendToGoogleSheets(entries) {
         
         return {
             date: entry.date,
-            procedureType: proc.name,
+            procedureId: entry.procedureId,  // Send ID, not name
             ptnID: `${initials}-${entry.patientId}`
         };
     });
@@ -375,19 +375,21 @@ async function generateMonthlyReport() {
         
         monthlyData.forEach(entry => {
             console.log('Processing entry:', entry);
-            const proc = procedures.find(p => p.name === entry.procedureType);
+            
+            // Look up procedure by ID (no more URL encoding issues!)
+            const proc = procedures.find(p => p.id === entry.procedureId);
             console.log('Found procedure:', proc);
             
             if (!proc) {
-                console.log('WARNING: Procedure not found for:', entry.procedureType);
+                console.log('WARNING: Procedure not found for ID:', entry.procedureId);
                 return; // Skip if procedure not found
             }
             
-            const key = `${entry.date}_${proc.id}`;
+            const key = `${entry.date}_${entry.procedureId}`;
             if (!groupedByDateAndProc[key]) {
                 groupedByDateAndProc[key] = {
                     date: entry.date,
-                    procedureId: proc.id,
+                    procedureId: entry.procedureId,
                     count: 0,
                     total: 0
                 };
