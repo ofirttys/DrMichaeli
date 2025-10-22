@@ -136,12 +136,14 @@ async function sendToGoogleSheets(entries) {
     
     try {
         // First, check for duplicates
+        const checkParams = new URLSearchParams({
+            action: 'check_duplicates',
+            data: JSON.stringify(dataToSend)
+        });
+        
         const checkResponse = await fetch(SCRIPT_URL, {
             method: 'POST',
-            body: JSON.stringify({
-                action: 'check_duplicates',
-                entries: dataToSend
-            })
+            body: checkParams
         });
         
         const checkResult = await checkResponse.json();
@@ -161,12 +163,14 @@ async function sendToGoogleSheets(entries) {
         }
         
         // Add entries to sheet
+        const addParams = new URLSearchParams({
+            action: 'add_entries',
+            data: JSON.stringify(dataToSend)
+        });
+        
         const addResponse = await fetch(SCRIPT_URL, {
             method: 'POST',
-            body: JSON.stringify({
-                action: 'add_entries',
-                entries: dataToSend
-            })
+            body: addParams
         });
         
         const addResult = await addResponse.json();
