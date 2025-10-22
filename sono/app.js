@@ -118,6 +118,7 @@ function updateDisplay() {
 
 // Helper function to send data to Google Sheets
 async function sendToGoogleSheets(entries) {
+    
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzyzA63my-M8DX10b8W6Tuml7IhfjHsUBZtuN7Qjq5cXjoFCpuT2GmnMKADw474lNWpWA/exec';
     
     // Prepare data
@@ -135,40 +136,27 @@ async function sendToGoogleSheets(entries) {
     });
     
     try {
-        // First, check for duplicates
-        const checkFormData = new URLSearchParams();
-        checkFormData.append('action', 'check_duplicates');
-        checkFormData.append('data', JSON.stringify(dataToSend));
+        // Add entries to sheet (duplicates will be silently skipped)
+        const formData = new URLSearchParams();
+        formData.append('action', 'add_entries');
+        formData.append('data', JSON.stringify(dataToSend));
         
-        const checkResponse = await fetch(SCRIPT_URL, {
+        const response = await fetch(SCRIPT_URL, {
             method: 'POST',
-            mode: 'no-cors', // This avoids CORS issues
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: checkFormData.toString()
+            body: formData.toString()
         });
         
-        // Note: With no-cors, we can't read the response, so we'll skip duplicate checking
-        // and just add the entries. If you need duplicate checking, you'll need to set up
-        // CORS properly on the Google Apps Script side.
+        const result = await response.json();
         
-        // Add entries to sheet
-        const addFormData = new URLSearchParams();
-        addFormData.append('action', 'add_entries');
-        addFormData.append('data', JSON.stringify(dataToSend));
-        
-        await fetch(SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: addFormData.toString()
-        });
-        
-        // With no-cors mode, we assume success if no error was thrown
-        return true;
+        if (result.success) {
+            return true;
+        } else {
+            alert('Error saving to Google Sheets: ' + result.message);
+            return false;
+        }
         
     } catch (error) {
         console.error('Error connecting to Google Sheets:', error);
