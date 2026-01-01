@@ -4,450 +4,156 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fertility Preservation & Oncofertility Selective - Welcome Package</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-sage: #8B9E7D;
-            --primary-deep: #4A5D47;
-            --accent-warm: #D4A574;
-            --accent-coral: #E8A598;
-            --neutral-cream: #F8F6F3;
-            --neutral-light: #FDFCFA;
-            --neutral-mid: #E8E5E0;
-            --text-dark: #2C3832;
-            --text-medium: #5A6B60;
-            --shadow-soft: rgba(75, 93, 71, 0.08);
-            --shadow-medium: rgba(75, 93, 71, 0.12);
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         
-        html {
-            scroll-behavior: smooth;
-        }
-        
         body {
-            font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.7;
-            color: var(--text-dark);
-            background: linear-gradient(135deg, var(--neutral-light) 0%, var(--neutral-cream) 100%);
-            overflow-x: hidden;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: #f7fafc;
+            padding: 20px;
         }
         
-        /* Navigation */
-        nav {
-            position: sticky;
-            top: 0;
-            background: rgba(253, 252, 250, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--neutral-mid);
-            z-index: 1000;
-            box-shadow: 0 2px 20px var(--shadow-soft);
-        }
-        
-        nav .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0.7rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        nav .logo {
-            font-family: 'Crimson Pro', serif;
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--primary-deep);
-            text-decoration: none;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        
-        nav a {
-            color: var(--text-medium);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 400;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-        
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-sage);
-            transition: width 0.3s ease;
-        }
-        
-        nav a:hover {
-            color: var(--primary-deep);
-			text-decoration: none;
-        }
-        
-        nav a:hover::after {
-            width: 100%;
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--primary-sage) 0%, var(--primary-deep) 100%);
-            color: white;
-            padding: 5rem 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="white" opacity="0.05"/></svg>');
-            opacity: 0.3;
-        }
-        
-        .hero-content {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-			text-align: center;
-        }
-        
-        .hero h1 {
-            font-family: 'Crimson Pro', serif;
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-            letter-spacing: -0.5px;
-        }
-        
-        .hero .subtitle {
-            font-size: 1.3rem;
-            opacity: 0.95;
-            font-weight: 300;
-            margin-bottom: 2rem;
-			color: white;
-			text-align: center;
-        }
-        
-        .hero .emoji {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-        
-        /* Container */
         .container {
-            max-width: 1100px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 12px;
         }
         
-        /* Section Headers */
-        section {
-            margin-bottom: 5rem;
-            animation: fadeInUp 0.8s ease;
-			scroll-margin-top: 160px;
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #e2e8f0;
         }
         
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        h1 {
+            color: #1a202c;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            color: #718096;
+            font-size: 1.2em;
+            margin-top: 10px;
         }
         
         h2 {
-            font-family: 'Crimson Pro', serif;
-            font-size: 2.5rem;
-            color: var(--primary-deep);
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-            position: relative;
-            padding-bottom: 1rem;
-        }
-        
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-warm), var(--accent-coral));
-            border-radius: 2px;
+            color: #2c5282;
+            font-size: 1.8em;
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #bee3f8;
         }
         
         h3 {
-            font-family: 'Crimson Pro', serif;
-            font-size: 1.8rem;
-            color: var(--primary-deep);
-            margin: 2.5rem 0 1.2rem 0;
+            color: #2d3748;
+            font-size: 1.4em;
+            margin: 30px 0 15px 0;
             font-weight: 600;
         }
         
         h4 {
-            font-size: 1.2rem;
-            color: var(--text-dark);
-            margin: 1.8rem 0 1rem 0;
+            color: #4a5568;
+            font-size: 1.1em;
+            margin: 20px 0 10px 0;
             font-weight: 600;
         }
         
         p {
-            margin-bottom: 1.2rem;
-            color: var(--text-medium);
-            font-size: 1.05rem;
+            margin-bottom: 15px;
             text-align: justify;
         }
         
-        /* Cards */
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 1.5rem 0;
-            box-shadow: 0 4px 20px var(--shadow-soft);
-            transition: all 0.3s ease;
-            border: 1px solid var(--neutral-mid);
-        }
-        
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px var(--shadow-medium);
-        }
-        
-        /* Info Boxes */
-        .info-box {
-            background: linear-gradient(135deg, rgba(139, 158, 125, 0.08) 0%, rgba(139, 158, 125, 0.12) 100%);
-            border-left: 4px solid var(--primary-sage);
-            padding: 1.8rem;
-            margin: 2rem 0;
-            border-radius: 8px;
-        }
-        
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(212, 165, 116, 0.08) 0%, rgba(212, 165, 116, 0.12) 100%);
-            border-left: 4px solid var(--accent-warm);
-            padding: 1.8rem;
-            margin: 2rem 0;
-            border-radius: 8px;
-        }
-        
-        .success-box {
-            background: linear-gradient(135deg, rgba(139, 158, 125, 0.1) 0%, rgba(139, 158, 125, 0.15) 100%);
-            border-left: 4px solid var(--primary-sage);
-            padding: 1.8rem;
-            margin: 2rem 0;
-            border-radius: 8px;
-        }
-        
-        /* Contact Card */
-        .contact-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-            border: 2px solid var(--neutral-mid);
-            box-shadow: 0 2px 12px var(--shadow-soft);
-        }
-        
-        .contact-card h4 {
-            color: var(--primary-deep);
-            margin-top: 0;
-        }
-        
-        /* Tables */
-        .schedule-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin: 2rem 0;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px var(--shadow-soft);
-        }
-        
-        .schedule-table th {
-            background: var(--primary-deep);
-            color: white;
-            padding: 1.2rem;
-            text-align: left;
-            font-weight: 500;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .schedule-table td {
-            padding: 1.2rem;
-            border-bottom: 1px solid var(--neutral-mid);
-            background: white;
-        }
-        
-        .schedule-table tr:last-child td {
-            border-bottom: none;
-        }
-        
-        .schedule-table tr:nth-child(even) td {
-            background: var(--neutral-cream);
-        }
-        
-        /* Procedure Cards */
-        .procedure-card {
-            background: white;
-            border: 2px solid var(--neutral-mid);
-            border-radius: 12px;
-            padding: 1.8rem;
-            margin: 1.5rem 0;
-            transition: all 0.3s ease;
-        }
-        
-        .procedure-card:hover {
-            border-color: var(--primary-sage);
-            box-shadow: 0 6px 25px var(--shadow-medium);
-            transform: translateX(8px);
-        }
-        
-        .procedure-card h4 {
-            color: var(--primary-deep);
-            margin-top: 0;
-        }
-        
-        /* Lists */
         ul, ol {
-            margin: 1.2rem 0 1.2rem 2rem;
+            margin: 15px 0 15px 30px;
         }
         
         li {
-            margin-bottom: 0.8rem;
-            color: var(--text-medium);
-            line-height: 1.7;
+            margin-bottom: 10px;
         }
         
-        li strong {
-            color: var(--text-dark);
+        .info-box {
+            background: #ebf8ff;
+            border-left: 4px solid #3182ce;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .highlight-box {
+            background: #fef5e7;
+            border-left: 4px solid #f39c12;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .success-box {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .contact-card {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .schedule-table th {
+            background: #2c5282;
+            color: white;
+            padding: 12px;
+            text-align: left;
             font-weight: 600;
         }
         
-        /* Links */
-        a {
-            color: var(--primary-sage);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-weight: 500;
+        .schedule-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
         }
         
-        a:hover {
-            color: var(--primary-deep);
-            text-decoration: underline;
+        .schedule-table tr:nth-child(even) {
+            background: #f7fafc;
         }
         
-        /* TOC */
-        .toc {
+        .procedure-card {
             background: white;
-            border-radius: 16px;
-            padding: 2.5rem;
-            margin: 3rem 0;
-            box-shadow: 0 4px 20px var(--shadow-soft);
-            border: 1px solid var(--neutral-mid);
-			scroll-margin-top: 80px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: box-shadow 0.3s ease;
         }
         
-        .toc h3 {
-            margin-top: 0;
-            color: var(--primary-deep);
+        .procedure-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
-        .toc ul {
-            list-style-type: none;
-            margin: 1rem 0 0 0;
-        }
-        
-        .toc li {
-            margin: 0.8rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-        
-        .toc li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--primary-sage);
-            font-weight: bold;
-        }
-        
-        /* Quick Links - 4 in one row */
-        .quick-links {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .quick-link-card {
-            background: linear-gradient(135deg, var(--primary-sage) 0%, var(--primary-deep) 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 12px;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-        }
-        
-        .quick-link-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 10px 30px var(--shadow-medium);
-            color: white;
-            text-decoration: none;
-        }
-        
-        .quick-link-card h3 {
-            color: white;
-            margin: 0;
-            font-size: 1.3rem;
-        }
-        
-        .quick-link-card p {
-            color: rgba(255, 255, 255, 0.9);
-            margin: 0.5rem 0 0 0;
-            font-size: 0.95rem;
-            text-align: center;
-        }
-        
-        /* Diagram container */
         .diagram-container {
             text-align: center;
-            margin: 2.5rem 0;
-            padding: 2rem;
-            background: var(--neutral-cream);
-            border-radius: 12px;
+            margin: 30px 0;
         }
         
         .diagram-container img {
@@ -457,101 +163,83 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         
-        /* Footer */
-        footer {
-            background: var(--primary-deep);
-            color: rgba(255, 255, 255, 0.8);
-            padding: 3rem 2rem;
-            margin-top: 5rem;
+        .toc {
+            background: #f7fafc;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
         }
         
-        footer .footer-content {
-            max-width: 1100px;
-            margin: 0 auto;
-            text-align: center;
+        .toc h3 {
+            margin-top: 0;
+            color: #2c5282;
         }
         
-        footer p {
-            color: rgba(255, 255, 255, 0.8);
-            margin: 0.5rem 0;
-            text-align: center;
+        .toc ul {
+            list-style: none;
+            margin: 15px 0;
         }
         
-        footer a {
-            color: var(--accent-warm);
+        .toc li {
+            margin: 8px 0;
         }
         
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .quick-links {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        .toc a {
+            color: #3182ce;
+            text-decoration: none;
+            font-weight: 500;
         }
         
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            h2 {
-                font-size: 2rem;
-            }
-            
-            nav ul {
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-            
-            .container {
-                padding: 2rem 1.5rem;
-            }
-            
-            .quick-links {
-                grid-template-columns: 1fr;
-            }
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        a {
+            color: #3182ce;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .resource-link {
+            display: inline-block;
+            background: #3182ce;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            margin: 5px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        
+        .resource-link:hover {
+            background: #2c5282;
+            text-decoration: none;
         }
         
         @media print {
-            nav, footer {
-                display: none;
-            }
             body {
                 background: white;
+                padding: 0;
             }
-            .hero {
-                background: none;
-                color: var(--text-dark);
+            .container {
+                box-shadow: none;
+                padding: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <a href="#" class="logo">Fertility Preservation Selective</a>
-            <ul>
-                <li><a href="#welcome">Welcome</a></li>
-                <li><a href="#activities">Schedule</a></li>
-                <li><a href="#concepts">Concepts</a></li>
-                <li><a href="#preservation">Procedures</a></li>
-                <li><a href="#resources">Resources</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <div class="hero">
-        <div class="hero-content">
-            <span class="emoji">🌱</span>
-            <h1>Welcome to the<br>Fertility Preservation & Oncofertility<br>Selective</h1>
+    <div class="container">
+        <header>
+            <h1>Welcome to the Fertility Preservation & Oncofertility Selective</h1>
             <p class="subtitle">Mount Sinai Hospital | University of Toronto</p>
             <p class="subtitle">Dr. Jennia Michaeli, MD, ObGyn, REI</p>
-        </div>
-    </div>
+        </header>
 
-    <!-- Main Content -->
-    <div class="container">
+        <!-- Table of Contents -->
         <div class="toc">
             <h3>Contents</h3>
             <ul>
@@ -596,10 +284,10 @@
                 Co-Director, Fertility Preservation Program at SickKids<br>
                 Chair, Fertility Preservation Special Interest Group, Canadian Fertility and Andrology Society<br>
                 Assistant Professor, Department of Obstetrics and Gynaecology, University of Toronto<br>
-                Email: <a href="/cdn-cgi/l/email-protection#315b545f5f58501f5c58525950545d587142585f50585954505d45591f5250"><span class="__cf_email__" data-cfemail="8fe5eae1e1e6eea1e2e6ece7eeeae3e6cffce6e1eee6e7eaeee3fbe7a1ecee">[email&#160;protected]</span></a></p>
+                Email: <a href="mailto:jennia.michaeli@sinaihealth.ca">jennia.michaeli@sinaihealth.ca</a></p>
                 
                 <h4>Administrative Contact</h4>
-                <p>Email: <a href="/cdn-cgi/l/email-protection#2266500c6f4b414a43474e4b514d44444b414762514b4c434b4a47434e564a0c4143"><span class="__cf_email__" data-cfemail="b3f7c19dfedad0dbd2d6dfdac0dcd5d5dad0d6f3c0daddd2dadbd6d2dfc7db9dd0d2">[email&#160;protected]</span></a></p>
+                <p>Email: <a href="mailto:Dr.Michaelisoffice@sinaihealth.ca">Dr.Michaelisoffice@sinaihealth.ca</a></p>
             </div>
 
             <h3>Location</h3>
@@ -1102,40 +790,9 @@
                 <li><strong>American Society for Reproductive Medicine (ASRM):</strong> <a href="https://www.asrm.org" target="_blank">www.asrm.org</a></li>
                 <li><strong>American Society of Clinical Oncology (ASCO):</strong> <a href="https://www.asco.org" target="_blank">www.asco.org</a></li>
                 <li><strong>Canadian Fertility and Andrology Society (CFAS):</strong> <a href="https://cfas.ca" target="_blank">cfas.ca</a></li>
-                <li><strong>Oncofertility Consortium:</strong> <a href="https://oncofertility.msu.edu/" target="_blank">oncofertility.msu.edu</a></li>
+                <li><strong>Oncofertility Consortium:</strong> <a href="https://oncofertility.northwestern.edu" target="_blank">oncofertility.northwestern.edu</a></li>
             </ul>
-
-            <div class="highlight-box">
-                <h4>Questions or Need More Resources?</h4>
-                <p>Feel free to reach out anytime if you need clarification, additional reading materials, or want to discuss what you're learning. I'm here to support your educational journey!</p>
-                <p><strong>Email:</strong> <a href="mailto:jennia.michaeli@sinaihealth.ca">jennia.michaeli@sinaihealth.ca</a></p>
-            </div>
         </section>
 
-        <!-- Final Message -->
-        <section class="card">
-            <h2>Looking Forward to Working with You</h2>
-            <p>I'm truly excited to have you join us for this selective. Fertility preservation is a rapidly evolving field where we have the privilege of making a real difference in people's lives during some of their most challenging moments.</p>
-            
-            <p>Come ready to learn, ask questions, and immerse yourself in this fascinating intersection of reproductive medicine, oncology, ethics, and hope.</p>
-            
-            <p style="margin-top: 2rem;"><strong>See you soon!</strong></p>
-            <p style="margin-top: 1rem;">Dr. Jennia Michaeli<br>
-            Reproductive Endocrinology & Infertility Specialist<br>
-            Mount Sinai Fertility Centre</p>
-        </section>
-
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <p style="font-family: 'Crimson Pro', serif; font-size: 1.3rem; margin-bottom: 1rem;">🌱</p>
-            <p><strong>Fertility Preservation & Oncofertility Selective</strong></p>
-            <p>Mount Sinai Hospital | University of Toronto</p>
-            <p style="margin-top: 1.5rem;">Questions? Contact <a href="mailto:jennia.michaeli@sinaihealth.ca">jennia.michaeli@sinaihealth.ca</a></p>
-            <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.7;">© 2025 Dr. Jennia Michaeli</p>
-        </div>
-    </footer>
-</body>
-</html>
+        <footer style="margin-top: 60px; padding-top: 30px; border-top: 2px solid #e2e8f0; text-align: center; color: #718096;">
+            <p>Mount Sinai Hospital | University of 
