@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sophia Lago - Personalized Schedule</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-sage: #8B9E7D;
+            --primary-deep: #4A5D47;
+            --accent-warm: #D4A574;
+            --accent-coral: #E8A598;
+            --neutral-cream: #F8F6F3;
+            --neutral-light: #FDFCFA;
+            --neutral-mid: #E8E5E0;
+            --text-dark: #2C3832;
+            --text-medium: #5A6B60;
+            --shadow-soft: rgba(75, 93, 71, 0.08);
+            --shadow-medium: rgba(75, 93, 71, 0.12);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--neutral-light) 0%, var(--neutral-cream) 100%);
+        }
+        
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(253, 252, 250, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--neutral-mid);
+            z-index: 1000;
+            box-shadow: 0 2px 20px var(--shadow-soft);
+        }
+        
+        nav .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.7rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav .logo {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-deep);
+            text-decoration: none;
+        }
+        
+        nav a {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--primary-deep);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-sage) 0%, var(--primary-deep) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="white" opacity="0.05"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            font-weight: 300;
+            color: white;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.5rem;
+            color: var(--primary-deep);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-warm), var(--accent-coral));
+            border-radius: 2px;
+        }
+        
+        h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.8rem;
+            color: var(--primary-deep);
+            margin: 2.5rem 0 1.2rem 0;
+            font-weight: 600;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            color: var(--text-medium);
+            font-size: 1.05rem;
+        }
+        
+        /* Table */
+        .schedule-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 2rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px var(--shadow-soft);
+        }
+        
+        .schedule-table th {
+            background: var(--primary-deep);
+            color: white;
+            padding: 1.2rem;
+            text-align: left;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .schedule-table td {
+            padding: 1.2rem;
+            border-bottom: 1px solid var(--neutral-mid);
+            background: white;
+        }
+        
+        .schedule-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .schedule-table tr:nth-child(even) td {
+            background: var(--neutral-cream);
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, rgba(139, 158, 125, 0.08) 0%, rgba(139, 158, 125, 0.12) 100%);
+            border-left: 4px solid var(--primary-sage);
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+        
+        a {
+            color: var(--primary-sage);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+        
+        a:hover {
+            color: var(--primary-deep);
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary-deep);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+        
+        footer p {
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0.5rem 0;
+        }
+        
+        footer a {
+            color: var(--accent-warm);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">← Back to Main Guide</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Your Personalized Schedule</h1>
+            <p class="subtitle">Sophia Lago | January 5-18, 2026</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h2>Your Two-Week Schedule</h2>
+        
+        <p>Your two-week experience will include three main types of activities: <strong>Research Days</strong>, <strong>Clinic Days</strong>, and <strong>IVF/Procedure Days</strong>. The specific schedule is below.</p>
+
+        <table class="schedule-table">
+            <tr>
+                <th style="width: 15%;">Date</th>
+                <th style="width: 20%;">Day Type</th>
+                <th style="width: 15%;">Time</th>
+                <th style="width: 50%;">Activities & Special Events</th>
+            </tr>
+            <tr>
+                <td><strong>Mon, Jan 5</strong></td>
+                <td>Orientation Day</td>
+                <td>9:00 AM - 4:00 PM</td>
+                <td>Welcome meeting, orientation to Mount Sinai Fertility, review of schedule and expectations</td>
+            </tr>
+            <tr>
+                <td><strong>Tue, Jan 6</strong></td>
+                <td>Clinic Day</td>
+                <td>8:00 AM - 5:00 PM</td>
+                <td>Infertility consultations, follow-up appointments, ultrasound monitoring</td>
+            </tr>
+            <tr>
+                <td><strong>Wed, Jan 7</strong></td>
+                <td>IVF/Procedure Day</td>
+                <td>7:15 AM - 2:00 PM</td>
+                <td>Oocyte retrievals, embryo transfers, operative hysteroscopy</td>
+            </tr>
+            <tr>
+                <td><strong>Thu, Jan 8</strong></td>
+                <td>Research Day</td>
+                <td>9:00 AM - 4:00 PM</td>
+                <td>Multidisciplinary meeting (10:00 AM), journal club, manuscript review</td>
+            </tr>
+            <tr>
+                <td><strong>Fri, Jan 9</strong></td>
+                <td>Clinic Day</td>
+                <td>8:00 AM - 4:00 PM</td>
+                <td>Fertility preservation consultations, Cancer Survivorship Clinic</td>
+            </tr>
+            <tr>
+                <td><strong>Mon, Jan 12</strong></td>
+                <td>IVF/Procedure Day</td>
+                <td>7:15 AM - 2:00 PM</td>
+                <td>Oocyte retrievals, sonohysterogram, office hysteroscopy</td>
+            </tr>
+            <tr>
+                <td><strong>Tue, Jan 13</strong></td>
+                <td>SickKids Visit</td>
+                <td>9:00 AM - 3:00 PM</td>
+                <td>Pediatric fertility preservation consultations at The Hospital for Sick Children</td>
+            </tr>
+            <tr>
+                <td><strong>Wed, Jan 14</strong></td>
+                <td>Clinic Day</td>
+                <td>8:00 AM - 5:00 PM</td>
+                <td>General infertility clinic, treatment planning discussions</td>
+            </tr>
+            <tr>
+                <td><strong>Thu, Jan 15</strong></td>
+                <td>Research Day</td>
+                <td>9:00 AM - 4:00 PM</td>
+                <td>Research presentation preparation, data analysis, educational rounds</td>
+            </tr>
+            <tr>
+                <td><strong>Fri, Jan 16</strong></td>
+                <td>IVF/Procedure Day</td>
+                <td>7:15 AM - 2:00 PM</td>
+                <td>Oocyte retrievals, embryo transfers, OTC consultation</td>
+            </tr>
+            <tr>
+                <td><strong>Mon, Jan 18</strong></td>
+                <td>Wrap-up Day</td>
+                <td>9:00 AM - 12:00 PM</td>
+                <td>Case review, feedback session, Q&A</td>
+            </tr>
+        </table>
+
+        <p style="margin-top: 20px; font-style: italic; color: #718096;">*This schedule is a template and will be customized based on clinical volume and patient scheduling. You will receive your finalized schedule before your rotation begins.</p>
+
+        <div class="info-box">
+            <h3 style="margin-top: 0;">Important Notes</h3>
+            <ul style="margin-left: 1.5rem;">
+                <li>Please arrive 15 minutes early on your first day</li>
+                <li>Procedure days start promptly at 7:15 AM</li>
+                <li>Bring your white coat, stethoscope, and notebook</li>
+                <li>Contact Dr. Michaeli if you have any questions: <a href="mailto:jennia.michaeli@sinaihealth.ca">jennia.michaeli@sinaihealth.ca</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>Fertility Preservation & Oncofertility Selective</strong></p>
+        <p>Mount Sinai Hospital | University of Toronto</p>
+        <p style="margin-top: 1rem;">Dr. Jennia Michaeli, MD, ObGyn, REI</p>
+    </footer>
+</body>
+</html>
