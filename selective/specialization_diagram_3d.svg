@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;display=swap');
+    </style>
+    
+    <!-- 3D Gradient definitions -->
+    <radialGradient id="grad1" cx="35%" cy="35%">
+      <stop offset="0%" style="stop-color:#FFEAE0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F5D5C8;stop-opacity:1" />
+    </radialGradient>
+    
+    <radialGradient id="grad2" cx="35%" cy="35%">
+      <stop offset="0%" style="stop-color:#FFCAB8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E8A598;stop-opacity:1" />
+    </radialGradient>
+    
+    <radialGradient id="grad3" cx="35%" cy="35%">
+      <stop offset="0%" style="stop-color:#FFE080;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F4C861;stop-opacity:1" />
+    </radialGradient>
+    
+    <radialGradient id="grad4" cx="35%" cy="35%">
+      <stop offset="0%" style="stop-color:#8B6B9A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6B4C7A;stop-opacity:1" />
+    </radialGradient>
+    
+    <radialGradient id="grad5" cx="35%" cy="35%">
+      <stop offset="0%" style="stop-color:#D8D8D8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B8B8B8;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Shadow filter for 3D depth -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="4" dy="6" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <rect width="800" height="600" fill="#ffffff"/>
+  
+  <text x="400" y="50" font-family="Montserrat, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#2C3E50">Clinical Subspecialization</text>
+  
+  <!-- Ellipses with 3D gradients and shadows -->
+  <ellipse cx="400" cy="330" rx="280" ry="240" fill="url(#grad1)" stroke="#D0B0A0" stroke-width="2" filter="url(#shadow)"/>
+  <ellipse cx="400" cy="290" rx="230" ry="195" fill="url(#grad2)" stroke="#D08070" stroke-width="2" filter="url(#shadow)"/>
+  <ellipse cx="400" cy="250" rx="180" ry="150" fill="url(#grad3)" stroke="#D0A040" stroke-width="2" filter="url(#shadow)"/>
+  <ellipse cx="400" cy="210" rx="130" ry="105" fill="url(#grad4)" stroke="#503050" stroke-width="2" filter="url(#shadow)"/>
+  <ellipse cx="400" cy="174" rx="80" ry="65" fill="url(#grad5)" stroke="#909090" stroke-width="2" filter="url(#shadow)"/>
+  
+  <!-- Text labels with subtle shadow for depth -->
+  <text x="400" y="535" font-family="Montserrat, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFFFFF" style="filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));">Obstetrics &amp; Gynecology</text>
+  <text x="400" y="440" font-family="Montserrat, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFFFFF" style="filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));">Reproductive Endocrinology</text>
+  <text x="400" y="466" font-family="Montserrat, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFFFFF" style="filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));">&amp; Infertility</text>
+  <text x="400" y="365" font-family="Montserrat, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFFFFF" style="filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));">Fertility Preservation</text>
+  <text x="400" y="290" font-family="Montserrat, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFFFFF" style="filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));">Oncofertility</text>
+  <text x="400" y="185" font-family="Montserrat, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFFFFF" style="filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));">Cancer</text>
+  <text x="400" y="205" font-family="Montserrat, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFFFFF" style="filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));">Survivorship</text>
+</svg>
