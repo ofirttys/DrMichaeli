@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Personalized Schedule</title>
+    <title id="page-title">Sophia Lago - Personalized Schedule</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -165,90 +165,40 @@
             font-size: 1.05rem;
         }
         
-        /* Calendar View */
-        .calendar-view {
-            margin-top: 2rem;
-        }
-        
-        .week-separator {
-            background: linear-gradient(135deg, var(--primary-sage), var(--primary-deep));
-            color: white;
-            padding: 1rem 1.5rem;
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin: 2rem 0 1rem 0;
-            border-radius: 8px;
-            text-align: center;
-            letter-spacing: 0.5px;
-        }
-        
-        .calendar-day {
-            background: white;
+        /* Table */
+        .schedule-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 2rem 0;
             border-radius: 12px;
-            margin-bottom: 1.2rem;
             overflow: hidden;
-            box-shadow: 0 2px 12px var(--shadow-soft);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 20px var(--shadow-soft);
         }
         
-        .calendar-day:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px var(--shadow-medium);
-        }
-        
-        .calendar-day-header {
-            background: linear-gradient(135deg, var(--primary-sage), var(--primary-deep));
+        .schedule-table th {
+            background: var(--primary-deep);
             color: white;
-            padding: 1rem 1.5rem;
-            display: grid;
-            grid-template-columns: 140px 100px 1fr;
-            gap: 1rem;
-            align-items: center;
-        }
-        
-        .day-name {
-            font-weight: 600;
-            font-size: 1.1rem;
+            padding: 1.2rem;
+            text-align: left;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
         }
         
-        .day-date {
-            font-size: 0.95rem;
-            opacity: 0.95;
-        }
-        
-        .day-type {
-            text-align: right;
-            font-size: 0.9rem;
-            opacity: 0.9;
-            line-height: 1.4;
-        }
-        
-        .calendar-day-body {
-            padding: 1.2rem 1.5rem;
-        }
-        
-        .calendar-event {
-            padding: 0.8rem 0;
+        .schedule-table td {
+            padding: 1.2rem;
             border-bottom: 1px solid var(--neutral-mid);
-            display: grid;
-            grid-template-columns: 140px 1fr;
-            gap: 1rem;
+            background: white;
         }
         
-        .calendar-event:last-child {
+        .schedule-table tr:last-child td {
             border-bottom: none;
         }
         
-        .calendar-event-time {
-            color: var(--primary-deep);
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-        
-        .calendar-event-title {
-            color: var(--text-dark);
-            font-size: 1rem;
+        .schedule-table tr:nth-child(even) td {
+            background: var(--neutral-cream);
         }
         
         .info-box {
@@ -285,40 +235,8 @@
             margin: 0.5rem 0;
         }
         
-        /* Loading State */
-        .loading {
-            text-align: center;
-            padding: 4rem 2rem;
-            color: var(--text-medium);
-        }
-        
-        .error {
-            background: #FEE;
-            border-left: 4px solid #C33;
-            padding: 1.8rem;
-            margin: 2rem 0;
-            border-radius: 8px;
-            color: #C33;
-        }
-        
-        @media (max-width: 768px) {
-            .calendar-day-header {
-                grid-template-columns: 1fr;
-                gap: 0.5rem;
-            }
-            
-            .day-type {
-                text-align: left;
-            }
-            
-            .calendar-event {
-                grid-template-columns: 1fr;
-                gap: 0.3rem;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
+        footer a {
+            color: var(--accent-warm);
         }
     </style>
 </head>
@@ -326,51 +244,138 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="#" class="logo">Fertility Preservation Selective</a>
-            <a href="#schedule">View Schedule</a>
+            <a href="index.html" class="logo">← Back to Main Guide</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <div class="hero">
         <div class="hero-content">
-            <h1 id="student-name">Loading Schedule...</h1>
-            <div class="subtitle">Fertility Preservation & Oncofertility Selective - Mount Sinai Fertility Centre</div>
+            <h1>Your Personalized Schedule</h1>
+            <p class="subtitle" id="subtitle">Sophia Lago | January 5-18, 2026</p>
         </div>
     </div>
 
     <!-- Main Content -->
     <div class="container">
-        <div id="loading" class="loading">
-            <p>Loading schedule data...</p>
-        </div>
+        <h2>Your Two-Week Schedule</h2>
         
-        <div id="error" class="error" style="display: none;">
-            <h3 style="margin-top: 0;">Error Loading Schedule</h3>
-            <p id="error-message"></p>
-        </div>
-        
-        <div id="schedule-content" style="display: none;">
-            <h2 id="schedule">Your Personalized Schedule</h2>
-            <div id="calendar-container" class="calendar-view"></div>
-            
-            <p style="margin-top: 20px; font-style: italic; color: #718096;">* Times and activities may be adjusted based on clinical volume. Virtual sessions will have OTN/Teams links sent in advance. In-person sessions at Downtown (DT) location are at 250 Dundas Street West.</p>
+        <p>Your two-week experience will include three main types of activities: <strong>Research Days</strong>, <strong>Clinic Days</strong>, and <strong>IVF/Procedure Days</strong>. The specific schedule is below.</p>
 
-            <div class="info-box">
-                <h3 style="margin-top: 0;">Important Notes</h3>
-                <ul style="margin-left: 1.5rem;">
-                    <li>Procedure days start promptly at 7:15 AM</li>
-                    <li>The day before clinic, you will receive an email with links to all clinical encounters via OTN (Ontario Telemedicine Network). Review patient charts in eIVF to familiarize yourself with each case before the appointments.</li>
-                    <li>Contact Dr. Michaeli if you have any questions: <a href="mailto:ofir.michaeli@sinaihealth.ca">ofir.michaeli@sinaihealth.ca</a></li>
-                </ul>
-            </div>
+		<style>
+			.calendar-view {
+				display: grid;
+				grid-template-columns: repeat(5, 1fr);
+				gap: 1rem;
+				margin: 2rem 0;
+			}
+			
+			.calendar-day {
+				background: white;
+				border: 2px solid var(--neutral-mid);
+				border-radius: 8px;
+				overflow: hidden;
+				min-height: 400px;
+				display: flex;
+				flex-direction: column;
+			}
+			
+			.calendar-day-header {
+				background: var(--primary-sage);
+				color: white;
+				padding: 1rem;
+				text-align: center;
+				font-weight: 600;
+			}
+			
+			.calendar-day-header .day-name {
+				font-size: 0.9rem;
+				margin-bottom: 0.25rem;
+			}
+			
+			.calendar-day-header .day-date {
+				font-size: 1.1rem;
+				font-weight: 700;
+			}
+			
+			.calendar-day-header .day-type {
+				font-size: 0.85rem;
+				margin-top: 0.25rem;
+				opacity: 0.9;
+				font-weight: 400;
+			}
+			
+			.calendar-day-body {
+				padding: 0.75rem;
+				flex-grow: 1;
+			}
+			
+			.calendar-event {
+				background: linear-gradient(135deg, rgba(139, 158, 125, 0.1) 0%, rgba(139, 158, 125, 0.15) 100%);
+				border-left: 3px solid var(--primary-sage);
+				padding: 0.6rem;
+				margin-bottom: 0.5rem;
+				border-radius: 4px;
+				font-size: 0.85rem;
+			}
+			
+			.calendar-event-time {
+				font-weight: 600;
+				color: var(--primary-deep);
+				font-size: 0.8rem;
+				margin-bottom: 0.25rem;
+			}
+			
+			.calendar-event-title {
+				color: var(--text-dark);
+				line-height: 1.3;
+			}
+			
+			.week-separator {
+				grid-column: 1 / -1;
+				background: var(--primary-deep);
+				color: white;
+				padding: 0.75rem;
+				text-align: center;
+				font-weight: 700;
+				border-radius: 8px;
+				margin: 1rem 0;
+			}
+			
+			@media (max-width: 1200px) {
+				.calendar-view {
+					grid-template-columns: repeat(3, 1fr);
+				}
+			}
+			
+			@media (max-width: 768px) {
+				.calendar-view {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+
+		<div class="calendar-view" id="calendar-container">
+			<!-- Schedule will be loaded here by JavaScript -->
+		</div>
+
+		<p style="margin-top: 20px; font-style: italic; color: #718096;">* Times and activities may be adjusted based on clinical volume. Virtual sessions will have OTN/Teams links sent in advance. In-person sessions at Downtown (DT) location are at 250 Dundas Street West.</p>
+
+        <div class="info-box">
+            <h3 style="margin-top: 0;">Important Notes</h3>
+            <ul style="margin-left: 1.5rem;">
+                <li>Procedure days start promptly at 7:15 AM</li>
+				<li>The day before clinic, you will receive an email with links to all clinical encounters via OTN (Ontario Telemedicine Network). Review patient charts in eIVF to familiarize yourself with each case before the appointments.</li>
+                <li>Contact Dr. Michaeli if you have any questions: <a href="/cdn-cgi/l/email-protection#c6aca3a8a8afa7e8abafa5aea7a3aaaf86b5afa8a7afaea3a7aab2aee8a5a7"><span class="__cf_email__" data-cfemail="563c3338383f37783b3f353e37333a3f16253f38373f3e33373a223e783537">[email&#160;protected]</span></a></li>
+            </ul>
         </div>
     </div>
 
     <!-- Footer -->
     <footer>
         <p><strong>Fertility Preservation & Oncofertility Selective</strong></p>
-        <p>Mount Sinai Fertility Centre | University of Toronto</p>
+        <p>Mount Sinai Fertility | University of Toronto</p>
+        <p>Dr. Jennia Michaeli, MD, ObGyn, REI</p>
     </footer>
 
     <script>
@@ -416,22 +421,22 @@
         // Format date display
         function formatDate(dateStr) {
             const date = new Date(dateStr);
-            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
             const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
             
             return {
-                dayName: days[date.getDay()].toUpperCase(),
+                dayName: days[date.getDay()],
                 dayDate: `${months[date.getMonth()]} ${date.getDate()}`,
                 fullDate: date
             };
         }
         
-        // Format name for display
+        // Format name for display (replace underscores with spaces)
         function formatName(name) {
             return name.replace(/_/g, ' ');
         }
         
-        // Get week range string
+        // Get week range string (e.g., "January 5-9, 2026")
         function getWeekRange(dates) {
             if (dates.length === 0) return '';
             
@@ -454,6 +459,30 @@
             }
         }
         
+        // Get overall date range for subtitle
+        function getOverallDateRange(events) {
+            if (events.length === 0) return '';
+            
+            const dates = events.map(e => new Date(e.Date)).sort((a, b) => a - b);
+            const firstDate = dates[0];
+            const lastDate = dates[dates.length - 1];
+            
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 
+                          'July', 'August', 'September', 'October', 'November', 'December'];
+            
+            const startMonth = months[firstDate.getMonth()];
+            const endMonth = months[lastDate.getMonth()];
+            const startDay = firstDate.getDate();
+            const endDay = lastDate.getDate();
+            const year = lastDate.getFullYear();
+            
+            if (startMonth === endMonth) {
+                return `${startMonth} ${startDay}-${endDay}, ${year}`;
+            } else {
+                return `${startMonth} ${startDay}-${endMonth} ${endDay}, ${year}`;
+            }
+        }
+        
         // Group events by date and week
         function groupEventsByWeek(events) {
             const weeks = [];
@@ -463,13 +492,13 @@
             events.forEach((event, index) => {
                 const eventDate = new Date(event.Date);
                 
-                // Check if this is a new week (Monday or first event)
+                // Check if this is a new week
                 if (currentWeek.length > 0) {
                     const lastDate = new Date(currentWeekDates[currentWeekDates.length - 1]);
                     const daysDiff = Math.floor((eventDate - lastDate) / (1000 * 60 * 60 * 24));
                     
-                    // Start new week if gap > 2 days or it's Monday and we have events
-                    if (daysDiff > 2 || (eventDate.getDay() === 1 && daysDiff > 0)) {
+                    // Start new week if gap > 2 days or it's Monday and we have 5+ days
+                    if (daysDiff > 2 || (eventDate.getDay() === 1 && currentWeekDates.length >= 5)) {
                         weeks.push({
                             dates: [...currentWeekDates],
                             events: [...currentWeek]
@@ -495,7 +524,7 @@
             return weeks;
         }
         
-        // Render schedule
+        // Render schedule in grid format
         function renderSchedule(events) {
             const container = document.getElementById('calendar-container');
             container.innerHTML = '';
@@ -569,22 +598,20 @@
                 const csvText = await response.text();
                 const events = parseCSV(csvText);
                 
-                // Update page
-                document.getElementById('student-name').textContent = formatName(name);
-                document.title = `${formatName(name)} - Personalized Schedule`;
+                // Update page title and subtitle
+                const formattedName = formatName(name);
+                const dateRange = getOverallDateRange(events);
+                
+                document.getElementById('page-title').textContent = `${formattedName} - Personalized Schedule`;
+                document.getElementById('subtitle').textContent = `${formattedName} | ${dateRange}`;
+                document.title = `${formattedName} - Personalized Schedule`;
                 
                 // Render schedule
                 renderSchedule(events);
                 
-                // Show content, hide loading
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('schedule-content').style.display = 'block';
-                
             } catch (error) {
                 console.error('Error loading schedule:', error);
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('error').style.display = 'block';
-                document.getElementById('error-message').textContent = error.message;
+                alert(`Error loading schedule: ${error.message}`);
             }
         }
         
