@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Personalized Schedule</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-sage: #8B9E7D;
+            --primary-deep: #4A5D47;
+            --accent-warm: #D4A574;
+            --accent-coral: #E8A598;
+            --neutral-cream: #F8F6F3;
+            --neutral-light: #FDFCFA;
+            --neutral-mid: #E8E5E0;
+            --text-dark: #2C3832;
+            --text-medium: #5A6B60;
+            --shadow-soft: rgba(75, 93, 71, 0.08);
+            --shadow-medium: rgba(75, 93, 71, 0.12);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--neutral-light) 0%, var(--neutral-cream) 100%);
+        }
+        
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(253, 252, 250, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--neutral-mid);
+            z-index: 1000;
+            box-shadow: 0 2px 20px var(--shadow-soft);
+        }
+        
+        nav .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.7rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav .logo {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-deep);
+            text-decoration: none;
+        }
+        
+        nav a {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--primary-deep);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-sage) 0%, var(--primary-deep) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="white" opacity="0.05"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            font-weight: 300;
+            color: white;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.5rem;
+            color: var(--primary-deep);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-warm), var(--accent-coral));
+            border-radius: 2px;
+        }
+        
+        h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.8rem;
+            color: var(--primary-deep);
+            margin: 2.5rem 0 1.2rem 0;
+            font-weight: 600;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            color: var(--text-medium);
+            font-size: 1.05rem;
+        }
+        
+        /* Calendar View */
+        .calendar-view {
+            margin-top: 2rem;
+        }
+        
+        .week-separator {
+            background: linear-gradient(135deg, var(--primary-sage), var(--primary-deep));
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 2rem 0 1rem 0;
+            border-radius: 8px;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+        
+        .calendar-day {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 1.2rem;
+            overflow: hidden;
+            box-shadow: 0 2px 12px var(--shadow-soft);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .calendar-day:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px var(--shadow-medium);
+        }
+        
+        .calendar-day-header {
+            background: linear-gradient(135deg, var(--primary-sage), var(--primary-deep));
+            color: white;
+            padding: 1rem 1.5rem;
+            display: grid;
+            grid-template-columns: 140px 100px 1fr;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .day-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .day-date {
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+        
+        .day-type {
+            text-align: right;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+        
+        .calendar-day-body {
+            padding: 1.2rem 1.5rem;
+        }
+        
+        .calendar-event {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--neutral-mid);
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 1rem;
+        }
+        
+        .calendar-event:last-child {
+            border-bottom: none;
+        }
+        
+        .calendar-event-time {
+            color: var(--primary-deep);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .calendar-event-title {
+            color: var(--text-dark);
+            font-size: 1rem;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, rgba(139, 158, 125, 0.08) 0%, rgba(139, 158, 125, 0.12) 100%);
+            border-left: 4px solid var(--primary-sage);
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+        
+        a {
+            color: var(--primary-sage);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+        
+        a:hover {
+            color: var(--primary-deep);
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary-deep);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+        
+        footer p {
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0.5rem 0;
+        }
+        
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-medium);
+        }
+        
+        .error {
+            background: #FEE;
+            border-left: 4px solid #C33;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            color: #C33;
+        }
+        
+        @media (max-width: 768px) {
+            .calendar-day-header {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .day-type {
+                text-align: left;
+            }
+            
+            .calendar-event {
+                grid-template-columns: 1fr;
+                gap: 0.3rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Fertility Preservation Selective</a>
+            <a href="#schedule">View Schedule</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1 id="student-name">Loading Schedule...</h1>
+            <div class="subtitle">Fertility Preservation & Oncofertility Selective - Mount Sinai Fertility Centre</div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div id="loading" class="loading">
+            <p>Loading schedule data...</p>
+        </div>
+        
+        <div id="error" class="error" style="display: none;">
+            <h3 style="margin-top: 0;">Error Loading Schedule</h3>
+            <p id="error-message"></p>
+        </div>
+        
+        <div id="schedule-content" style="display: none;">
+            <h2 id="schedule">Your Personalized Schedule</h2>
+            <div id="calendar-container" class="calendar-view"></div>
+            
+            <p style="margin-top: 20px; font-style: italic; color: #718096;">* Times and activities may be adjusted based on clinical volume. Virtual sessions will have OTN/Teams links sent in advance. In-person sessions at Downtown (DT) location are at 250 Dundas Street West.</p>
+
+            <div class="info-box">
+                <h3 style="margin-top: 0;">Important Notes</h3>
+                <ul style="margin-left: 1.5rem;">
+                    <li>Procedure days start promptly at 7:15 AM</li>
+                    <li>The day before clinic, you will receive an email with links to all clinical encounters via OTN (Ontario Telemedicine Network). Review patient charts in eIVF to familiarize yourself with each case before the appointments.</li>
+                    <li>Contact Dr. Michaeli if you have any questions: <a href="mailto:ofir.michaeli@sinaihealth.ca">ofir.michaeli@sinaihealth.ca</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>Fertility Preservation & Oncofertility Selective</strong></p>
+        <p>Mount Sinai Fertility Centre | University of Toronto</p>
+    </footer>
+
+    <script>
+        // Parse CSV data
+        function parseCSV(text) {
+            const lines = text.trim().split('\n');
+            const headers = lines[0].split(',').map(h => h.trim());
+            const data = [];
+            
+            for (let i = 1; i < lines.length; i++) {
+                const line = lines[i];
+                if (!line.trim()) continue;
+                
+                // Handle quoted fields with commas
+                const values = [];
+                let current = '';
+                let inQuotes = false;
+                
+                for (let j = 0; j < line.length; j++) {
+                    const char = line[j];
+                    
+                    if (char === '"') {
+                        inQuotes = !inQuotes;
+                    } else if (char === ',' && !inQuotes) {
+                        values.push(current.trim());
+                        current = '';
+                    } else {
+                        current += char;
+                    }
+                }
+                values.push(current.trim());
+                
+                const entry = {};
+                headers.forEach((header, index) => {
+                    entry[header] = values[index] || '';
+                });
+                data.push(entry);
+            }
+            
+            return data;
+        }
+        
+        // Format date display
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            
+            return {
+                dayName: days[date.getDay()].toUpperCase(),
+                dayDate: `${months[date.getMonth()]} ${date.getDate()}`,
+                fullDate: date
+            };
+        }
+        
+        // Format name for display
+        function formatName(name) {
+            return name.replace(/_/g, ' ');
+        }
+        
+        // Get week range string
+        function getWeekRange(dates) {
+            if (dates.length === 0) return '';
+            
+            const firstDate = new Date(dates[0]);
+            const lastDate = new Date(dates[dates.length - 1]);
+            
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 
+                          'July', 'August', 'September', 'October', 'November', 'December'];
+            
+            const startMonth = months[firstDate.getMonth()];
+            const endMonth = months[lastDate.getMonth()];
+            const startDay = firstDate.getDate();
+            const endDay = lastDate.getDate();
+            const year = lastDate.getFullYear();
+            
+            if (startMonth === endMonth) {
+                return `${startMonth} ${startDay}-${endDay}, ${year}`;
+            } else {
+                return `${startMonth} ${startDay} - ${endMonth} ${endDay}, ${year}`;
+            }
+        }
+        
+        // Group events by date and week
+        function groupEventsByWeek(events) {
+            const weeks = [];
+            let currentWeek = [];
+            let currentWeekDates = [];
+            
+            events.forEach((event, index) => {
+                const eventDate = new Date(event.Date);
+                
+                // Check if this is a new week (Monday or first event)
+                if (currentWeek.length > 0) {
+                    const lastDate = new Date(currentWeekDates[currentWeekDates.length - 1]);
+                    const daysDiff = Math.floor((eventDate - lastDate) / (1000 * 60 * 60 * 24));
+                    
+                    // Start new week if gap > 2 days or it's Monday and we have events
+                    if (daysDiff > 2 || (eventDate.getDay() === 1 && daysDiff > 0)) {
+                        weeks.push({
+                            dates: [...currentWeekDates],
+                            events: [...currentWeek]
+                        });
+                        currentWeek = [];
+                        currentWeekDates = [];
+                    }
+                }
+                
+                currentWeek.push(event);
+                if (!currentWeekDates.includes(event.Date)) {
+                    currentWeekDates.push(event.Date);
+                }
+            });
+            
+            if (currentWeek.length > 0) {
+                weeks.push({
+                    dates: currentWeekDates,
+                    events: currentWeek
+                });
+            }
+            
+            return weeks;
+        }
+        
+        // Render schedule
+        function renderSchedule(events) {
+            const container = document.getElementById('calendar-container');
+            container.innerHTML = '';
+            
+            // Group by weeks
+            const weeks = groupEventsByWeek(events);
+            
+            weeks.forEach((week, weekIndex) => {
+                // Add week separator
+                const weekDiv = document.createElement('div');
+                weekDiv.className = 'week-separator';
+                weekDiv.textContent = `WEEK ${weekIndex + 1} - ${getWeekRange(week.dates)}`;
+                container.appendChild(weekDiv);
+                
+                // Group events by date within the week
+                const dateGroups = {};
+                week.events.forEach(event => {
+                    if (!dateGroups[event.Date]) {
+                        dateGroups[event.Date] = [];
+                    }
+                    dateGroups[event.Date].push(event);
+                });
+                
+                // Render each day
+                Object.keys(dateGroups).forEach(date => {
+                    const dayEvents = dateGroups[date];
+                    const dateInfo = formatDate(date);
+                    
+                    // Find header event (Start = "0:00")
+                    const headerEvent = dayEvents.find(e => e.Start === '0:00' || e.Start === '00:00');
+                    const regularEvents = dayEvents.filter(e => e.Start !== '0:00' && e.Start !== '00:00');
+                    
+                    const dayDiv = document.createElement('div');
+                    dayDiv.className = 'calendar-day';
+                    
+                    let dayHTML = `
+                        <div class="calendar-day-header">
+                            <div class="day-name">${dateInfo.dayName}</div>
+                            <div class="day-date">${dateInfo.dayDate}</div>
+                            <div class="day-type">${headerEvent ? headerEvent.Item.replace(/,/g, '<br>') : ''}</div>
+                        </div>
+                        <div class="calendar-day-body">
+                    `;
+                    
+                    regularEvents.forEach(event => {
+                        const timeRange = event.Start && event.End ? `${event.Start}-${event.End}` : '';
+                        dayHTML += `
+                            <div class="calendar-event">
+                                <div class="calendar-event-time">${timeRange}</div>
+                                <div class="calendar-event-title">${event.Item}</div>
+                            </div>
+                        `;
+                    });
+                    
+                    dayHTML += '</div>';
+                    dayDiv.innerHTML = dayHTML;
+                    container.appendChild(dayDiv);
+                });
+            });
+        }
+        
+        // Load schedule from CSV
+        async function loadSchedule(name) {
+            try {
+                const response = await fetch(`${name}.csv`);
+                
+                if (!response.ok) {
+                    throw new Error(`Could not find schedule file: ${name}.csv`);
+                }
+                
+                const csvText = await response.text();
+                const events = parseCSV(csvText);
+                
+                // Update page
+                document.getElementById('student-name').textContent = formatName(name);
+                document.title = `${formatName(name)} - Personalized Schedule`;
+                
+                // Render schedule
+                renderSchedule(events);
+                
+                // Show content, hide loading
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('schedule-content').style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error loading schedule:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error-message').textContent = error.message;
+            }
+        }
+        
+        // Get name from URL parameter
+        function getNameFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('name') || 'Sophia_Lago';
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            const name = getNameFromURL();
+            loadSchedule(name);
+        });
+    </script>
+</body>
+</html>
