@@ -13,13 +13,13 @@ Date,Start,End,Item
 4/2/2026,7:30,15:00,"Procedures (with another MD)"
 4/3/2026,0:00,0:00,"Good Friday, Holiday"
 4/6/2026,0:00,0:00,"Easter Monday, Holiday"
-4/7/2026,0:00,0:00,"Clinic, Virtual (with another MD)"
-4/7/2026,8:00,16:00,Clinic (virtual) (with another MD)
+4/7/2026,0:00,0:00,"Clinic, Virtual"
+4/7/2026,8:00,16:00,Clinic (with another MD)
 4/8/2026,0:00,0:00,"Procedures, In-Person DT"
-4/8/2026,8:00,17:00,"Procedures, In-Person DT"
+4/8/2026,8:00,17:00,"Procedures"
 4/9/2026,0:00,0:00,"Clinic, In-Person DT"
-4/9/2026,8:00,16:00,"Clinic, In-Person DT"
-4/10/2026,0:00,0:00,"ClinicCancer Survivorship + MD2, Virtual, In-Person DT"
+4/9/2026,8:00,16:00,"Clinic"
+4/10/2026,0:00,0:00,"Cancer Survivorship + MD2, Virtual"
 4/10/2026,7:30,11:00,Cancer Survivorship Virtual
 4/10/2026,11:00,12:00,MD2 Blood rounds
 4/10/2026,12:00,12:30,Wrap-up and feedback session
