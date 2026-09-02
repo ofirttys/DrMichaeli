@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Michaeli Projects — Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f7f5;
+    --surface:#ffffff;
+    --border:#e6e4df;
+    --text:#1f1d1a;
+    --text-dim:#6b6862;
+    --text-faint:#928f88;
+    --dot: rgba(20,18,14,.06);
+    --nav-bg: rgba(255,255,255,.72);
+    --shadow: 0 1px 2px rgba(20,18,14,.04), 0 8px 20px -12px rgba(20,18,14,.12);
+    --shadow-hover: 0 2px 4px rgba(20,18,14,.06), 0 16px 32px -14px rgba(20,18,14,.18);
+
+    --tools:#0d9488;      --tools-tint:#eefaf8;
+    --academic:#7c3aed;   --academic-tint:#f5f2fe;
+    --teaching:#c2760c;   --teaching-tint:#fdf6ea;
+    --clinic:#e11d48;     --clinic-tint:#fdf0f2;
+    --surveys:#059669;    --surveys-tint:#ecfaf4;
+    --personal:#4f46e5;   --personal-tint:#efeefe;
+
+    --blob1: rgba(13,148,136,.30);
+    --blob2: rgba(124,58,237,.26);
+    --blob3: rgba(225,29,72,.20);
+    --blob4: rgba(79,70,229,.22);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#131210;
+      --surface:#1c1b17;
+      --border:#332f27;
+      --text:#f1efe9;
+      --text-dim:#a9a59c;
+      --text-faint:#7c7870;
+      --dot: rgba(255,255,255,.055);
+      --nav-bg: rgba(19,18,16,.68);
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 20px -12px rgba(0,0,0,.5);
+      --shadow-hover: 0 2px 6px rgba(0,0,0,.35), 0 18px 34px -14px rgba(0,0,0,.6);
+
+      --tools:#2dd4bf;      --tools-tint:#132623;
+      --academic:#a78bfa;   --academic-tint:#211c30;
+      --teaching:#f2a93b;   --teaching-tint:#2a2115;
+      --clinic:#fb7185;     --clinic-tint:#2b1a1e;
+      --surveys:#34d399;    --surveys-tint:#15261f;
+      --personal:#a5b4fc;   --personal-tint:#1e1e30;
+
+      --blob1: rgba(45,212,191,.20);
+      --blob2: rgba(167,139,250,.20);
+      --blob3: rgba(251,113,133,.16);
+      --blob4: rgba(165,180,252,.18);
+    }
+  }
+
+  *{box-sizing:border-box;}
+  html{ scroll-behavior:smooth; }
+  html,body{margin:0;padding:0;}
+  body{
+    background-color:var(--bg);
+    background-image: radial-gradient(circle at 1px 1px, var(--dot) 1.4px, transparent 0);
+    background-size: 24px 24px;
+    color:var(--text);
+    font-family: 'Inter', ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height:1.5;
+  }
+  a{color:inherit;}
+
+  /* ---- top nav ---- */
+  .topnav{
+    position:sticky; top:0; z-index:50;
+    background:var(--nav-bg);
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    border-bottom:1px solid var(--border);
+  }
+  .topnav-inner{
+    max-width:1120px; margin:0 auto; padding:13px 24px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    flex-wrap:wrap;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    text-decoration:none; color:var(--text);
+    font-family:'Sora', sans-serif; font-weight:700; font-size:15px;
+    letter-spacing:-0.01em;
+  }
+  .brand-mark{
+    width:28px;height:28px;border-radius:8px;
+    background:linear-gradient(135deg,var(--tools),var(--academic) 55%,var(--personal));
+    color:#fff; display:flex;align-items:center;justify-content:center;
+    font-family:'Sora',sans-serif; font-size:13px; font-weight:700;
+    flex:none;
+  }
+  .topnav-links{ display:flex; gap:2px; flex-wrap:wrap; }
+  .topnav-links a{
+    text-decoration:none; font-size:13.5px; font-weight:600;
+    padding:8px 12px; border-radius:8px; color:var(--text-dim);
+    transition: background .15s ease, color .15s ease;
+  }
+  .topnav-links a:hover{ background:var(--surface); color:var(--text); }
+  .topnav-links a[data-cat="tools"]:hover{ color:var(--tools); }
+  .topnav-links a[data-cat="academic"]:hover{ color:var(--academic); }
+  .topnav-links a[data-cat="teaching"]:hover{ color:var(--teaching); }
+  .topnav-links a[data-cat="clinic"]:hover{ color:var(--clinic); }
+  .topnav-links a[data-cat="surveys"]:hover{ color:var(--surveys); }
+  .topnav-links a[data-cat="personal"]:hover{ color:var(--personal); }
+
+  /* ---- hero ---- */
+  .hero{ position:relative; overflow:hidden; padding:80px 24px 76px; }
+  .hero-bg{
+    position:absolute; inset:-30% -10% auto -10%; height:170%;
+    z-index:0; pointer-events:none;
+    background:
+      radial-gradient(38% 55% at 12% 25%, var(--blob1), transparent 72%),
+      radial-gradient(34% 48% at 88% 10%, var(--blob2), transparent 72%),
+      radial-gradient(38% 50% at 78% 92%, var(--blob3), transparent 72%),
+      radial-gradient(34% 45% at 15% 95%, var(--blob4), transparent 72%);
+    filter: blur(64px);
+  }
+  .hero-inner{ position:relative; z-index:1; max-width:1120px; margin:0 auto; }
+  .eyebrow{
+    display:inline-block; font-size:12px; font-weight:700; letter-spacing:.07em; text-transform:uppercase;
+    color:var(--text-faint); background:var(--surface); border:1px solid var(--border);
+    padding:6px 13px; border-radius:999px; margin-bottom:20px;
+  }
+  .hero h1{
+    font-family:'Sora', sans-serif;
+    font-size:clamp(32px,5vw,50px); font-weight:700;
+    margin:0 0 14px; letter-spacing:-0.02em;
+  }
+  .hero h1 .grad{
+    background:linear-gradient(90deg,var(--tools),var(--academic) 45%,var(--clinic));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p{ margin:0; color:var(--text-dim); font-size:17px; max-width:600px; }
+
+  /* ---- sections ---- */
+  main{ position:relative; z-index:1; }
+  section.cat{
+    padding:44px 0 52px;
+    background:var(--tint);
+    scroll-margin-top:70px;
+  }
+  .section-inner{ max-width:1120px; margin:0 auto; padding:0 24px; }
+
+  .cat-head{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    margin-bottom:22px;
+  }
+  .cat-dot{
+    width:10px;height:10px;border-radius:50%;
+    background:var(--accent);
+    flex:none;
+  }
+  .cat-head h2{
+    font-family:'Sora', sans-serif;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    font-weight:700;
+    margin:0;
+    color:var(--accent);
+  }
+  .cat-head .count{
+    font-size:13px;
+    color:var(--text-faint);
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:16px;
+  }
+
+  .card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:18px;
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    text-decoration:none;
+    color:inherit;
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .card:hover{
+    transform:translateY(-3px);
+    box-shadow:var(--shadow-hover);
+    border-color:var(--accent);
+  }
+
+  .tile{
+    width:44px;height:44px;
+    border-radius:12px;
+    background:var(--tint);
+    color:var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    flex:none;
+  }
+  .tile svg{ width:22px; height:22px; }
+
+  .card h3{
+    font-size:15.5px;
+    margin:0 0 3px;
+    letter-spacing:-0.01em;
+  }
+  .card .domain{
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size:11.5px;
+    color:var(--text-faint);
+    word-break:break-all;
+  }
+  .card p.desc{
+    margin:2px 0 0;
+    font-size:13.5px;
+    color:var(--text-dim);
+    flex:1;
+  }
+
+  footer{
+    max-width:1120px;
+    margin:0 auto;
+    padding:28px 24px 64px;
+    color:var(--text-faint);
+    font-size:12.5px;
+  }
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="#top"><span class="brand-mark">M</span>Michaeli Projects</a>
+    <nav class="topnav-links">
+      <a href="#tools" data-cat="tools">Tools</a>
+      <a href="#academic" data-cat="academic">Academic</a>
+      <a href="#teaching" data-cat="teaching">Teaching</a>
+      <a href="#clinic" data-cat="clinic">Clinic</a>
+      <a href="#surveys" data-cat="surveys">Surveys</a>
+      <a href="#personal" data-cat="personal">Personal</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <span class="eyebrow">23 projects · 6 categories</span>
+    <h1>Michaeli <span class="grad">Projects</span></h1>
+    <p>Tools, research, teaching materials, and clinic resources built across fertility preservation and reproductive medicine — plus a few personal ones.</p>
+  </div>
+</section>
+
+<main>
+
+  <!-- TOOLS -->
+  <section class="cat" id="tools" style="--accent:var(--tools);--tint:var(--tools-tint);">
+    <div class="section-inner">
+    <div class="cat-head"><span class="cat-dot"></span><h2>Tools</h2><span class="count">5</span></div>
+    <div class="grid">
+
+      <a class="card" href="https://amh.fertilitypreservation.ca" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V13M9 20V9M14 20V15M19 20V5"/><path d="M4 9l5-4 5 3 5-6" opacity=".55"/></svg></div>
+        <div>
+          <h3>AMH Calculator</h3>
+          <div class="domain">amh.fertilitypreservation.ca</div>
+        </div>
+        <p class="desc">Plots a patient's AMH against age-matched percentiles from peer-reviewed data, with plain-language notes on what AMH can't tell you.</p>
+      </a>
+
+      <a class="card" href="https://cv.michaeli.ca" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M9 12h6M9 15.5h6M9 8.5h3"/></svg></div>
+        <div>
+          <h3>CV Builder</h3>
+          <div class="domain">cv.michaeli.ca</div>
+        </div>
+        <p class="desc">Editable online CV with toggleable sections and one-click export to a formatted DOCX.</p>
+      </a>
+
+      <a class="card" href="https://teachingreport.michaeli.ca/" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="1.5"/><path d="M9 3.5h6v2H9z"/><path d="m9.5 13 2 2 3.5-4"/></svg></div>
+        <div>
+          <h3>Teaching Activity Tracker</h3>
+          <div class="domain">teachingreport.michaeli.ca</div>
+        </div>
+        <p class="desc">Quick-log form for University of Toronto teaching activities as they happen, built to make year-end reporting painless.</p>
+      </a>
+
+      <a class="card" href="https://dr.michaeli.ca/sono" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2-7 3 14 2.5-10L14 15l1.5-3H22"/></svg></div>
+        <div>
+          <h3>Sono Tracker</h3>
+          <div class="domain">dr.michaeli.ca/sono</div>
+        </div>
+        <p class="desc">Logs monthly ultrasound procedures for Mount Sinai Fertility and generates summaries, monthly reports, and CSV/PDF invoices.</p>
+      </a>
+
+      <a class="card" href="https://zzz.tty.co.il" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3.5a8 8 0 1 0 5.5 13.6A8.5 8.5 0 0 1 15 3.5z"/></svg></div>
+        <div>
+          <h3>Time Period Splitter</h3>
+          <div class="domain">zzz.tty.co.il</div>
+        </div>
+        <p class="desc">Give it a start time, end time, and number of people — it splits the window into sleep/wake shifts for each person.</p>
+      </a>
+
+    </div>
+    </div>
+  </section>
+
+  <!-- ACADEMIC -->
+  <section class="cat" id="academic" style="--accent:var(--academic);--tint:var(--academic-tint);">
+    <div class="section-inner">
+    <div class="cat-head"><span class="cat-dot"></span><h2>Academic</h2><span class="count">5</span></div>
+    <div class="grid">
+
+      <a class="card" href="https://oicr.fertilitypreservation.ca/framework/" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5-9-5z"/><path d="M3 13l9 5 9-5" opacity=".55"/><path d="M3 18l9 5 9-5" opacity=".3"/></svg></div>
+        <div>
+          <h3>Evaluation Framework</h3>
+          <div class="domain">oicr.fertilitypreservation.ca/framework</div>
+        </div>
+        <p class="desc">Combines RE-AIM, CFIR, Proctor's Taxonomy and the Theoretical Framework of Acceptability into one model for evaluating SickKids' ovarian tissue cryopreservation program.</p>
+      </a>
+
+      <a class="card" href="https://oicr.fertilitypreservation.ca/reach/" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="4" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="20" cy="12" r="2"/><path d="M6 12h4M14 12h4"/></svg></div>
+        <div>
+          <h3>Care Pathway &amp; Reach Metrics</h3>
+          <div class="domain">oicr.fertilitypreservation.ca/reach</div>
+        </div>
+        <p class="desc">Maps the ten-step OTC patient journey from diagnosis to tissue harvesting and tracks completion at each stage to spot drop-off points.</p>
+      </a>
+
+      <a class="card" href="https://oicr.fertilitypreservation.ca/onboarding/" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="m12 8 2.6 3.4L12 16l-2.6-4.6L12 8z"/></svg></div>
+        <div>
+          <h3>Project Onboarding</h3>
+          <div class="domain">oicr.fertilitypreservation.ca/onboarding</div>
+        </div>
+        <p class="desc">Orientation hub for the SickKids / Mount Sinai OTC implementation-science collaboration, with background on implementation science and oncofertility.</p>
+      </a>
+
+      <a class="card" href="https://oicr.fertilitypreservation.ca/decisionaid/" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v6"/><path d="M12 10 6 15v5M12 10l6 5v5"/><circle cx="12" cy="4" r="1.6"/></svg></div>
+        <div>
+          <h3>Decision Aid <span style="font-weight:400;color:var(--text-faint);">(prototype)</span></h3>
+          <div class="domain">oicr.fertilitypreservation.ca/decisionaid</div>
+        </div>
+        <p class="desc">Helps adolescents with cancer and their families weigh egg freezing against ovarian tissue freezing ahead of a fertility-preservation consult.</p>
+      </a>
+
+      <a class="card" href="https://lab.michaeli.ca" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5.2 9A1.8 1.8 0 0 0 6.4 21h11.2a1.8 1.8 0 0 0 1.6-2.6L14 9V3"/><path d="M8 15h8" opacity=".6"/></svg></div>
+        <div>
+          <h3>Michaeli Lab <span style="font-weight:400;color:var(--text-faint);">(coming soon)</span></h3>
+          <div class="domain">lab.michaeli.ca</div>
+        </div>
+        <p class="desc">Future home of the Michaeli Lab's fertility-preservation research program.</p>
+      </a>
+
+    </div>
+    </div>
+  </section>
+
+  <!-- TEACHING -->
+  <section class="cat" id="teaching" style="--accent:var(--teaching);--tint:var(--teaching-tint);">
+    <div class="section-inner">
+    <div class="cat-head"><span class="cat-dot"></span><h2>Teaching</h2><span class="count">2</span></div>
+    <div class="grid">
+
+      <a class="card" href="https://researchrotation.fertilitypreservation.ca/" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 3 8l9 4 9-4-9-4z"/><path d="M6 10.5V16c0 1.1 2.7 2.5 6 2.5s6-1.4 6-2.5v-5.5"/><path d="M21 8v6" /></svg></div>
+        <div>
+          <h3>GREI Fellowship Tracker</h3>
+          <div class="domain">researchrotation.fertilitypreservation.ca</div>
+        </div>
+        <p class="desc">Lets UofT GREI fellows log research, advocacy and QI projects, with admin tools for program-wide reporting.</p>
+      </a>
+
+      <a class="card" href="https://dr.michaeli.ca/selective" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v18H6.5A2.5 2.5 0 0 1 4 18.5v-13z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H12v18h5.5a2.5 2.5 0 0 0 2.5-2.5v-13z"/></svg></div>
+        <div>
+          <h3>Student Rotation Guide</h3>
+          <div class="domain">dr.michaeli.ca/selective</div>
+        </div>
+        <p class="desc">Welcome package and orientation for the two-week fertility-preservation / oncofertility clinical selective at Mount Sinai.</p>
+      </a>
+
+    </div>
+    </div>
+  </section>
+
+  <!-- CLINIC -->
+  <section class="cat" id="clinic" style="--accent:var(--clinic);--tint:var(--clinic-tint);">
+    <div class="section-inner">
+    <div class="cat-head"><span class="cat-dot"></span><h2>Clinic</h2><span class="count">4</span></div>
+    <div class="grid">
+
+      <a class="card" href="https://dr.michaeli.ca" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c2-6 5-13 7-15 2 2 5 9 7 15"/><circle cx="18.3" cy="18.3" r="2.2"/></svg></div>
+        <div>
+          <h3>Patient Guide</h3>
+          <div class="domain">dr.michaeli.ca</div>
+        </div>
+        <p class="desc">Post-appointment resource walking Mount Sinai Fertility patients through their investigation plan, test booking, and next steps.</p>
+      </a>
+
+      <a class="card" href="https://ocfp.fertilitypreservation.ca/map" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg></div>
+        <div>
+          <h3>Referral Map</h3>
+          <div class="domain">ocfp.fertilitypreservation.ca/map</div>
+        </div>
+        <p class="desc">Interactive map of OCFP referral volumes across Ontario, broken down by clinic and case-volume tier.</p>
+      </a>
+
+      <a class="card" href="https://ocfp.fertilitypreservation.ca" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6"/><path d="M12 6.5v4M10 8.5h4" opacity=".7"/></svg></div>
+        <div>
+          <h3>Ontario Centre for Fertility Preservation</h3>
+          <div class="domain">ocfp.fertilitypreservation.ca</div>
+        </div>
+        <p class="desc">Program site for fertility preservation ahead of cancer treatment, family planning, or gender-affirming care — team, services and booking.</p>
+      </a>
+
+      <a class="card" href="https://timeline.in-fertility.ca" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><circle cx="6" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="18" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg></div>
+        <div>
+          <h3>Ontario Fertility Timeline</h3>
+          <div class="domain">timeline.in-fertility.ca</div>
+        </div>
+        <p class="desc">Ontario's IVF market history — policy, ownership, clinics, COVID, and the Mount Sinai Fertility thread. New home for the project; SSL setup in progress.</p>
+      </a>
+
+    </div>
+    </div>
+  </section>
+
+  <!-- SURVEYS -->
+  <section class="cat" id="surveys" style="--accent:var(--surveys);--tint:var(--surveys-tint);">
+    <div class="section-inner">
+    <div class="cat-head"><span class="cat-dot"></span><h2>Surveys</h2><span class="count">4</span></div>
+    <div class="grid">
+
+      <a class="card" href="https://survivorshipsurvey.fertilitypreservation.ca/" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="1.5"/><path d="M9 3.5h6v2H9z"/><path d="M9 12h6M9 15.5h4"/></svg></div>
+        <div>
+          <h3>Oncofertility Consortium Survey</h3>
+          <div class="domain">survivorshipsurvey.fertilitypreservation.ca</div>
+        </div>
+        <p class="desc">Five-minute anonymous survey for REI / fertility clinicians worldwide on fertility follow-up practices for pediatric cancer survivors.</p>
+      </a>
+
+      <a class="card" href="https://survivorshipsurvey.fertilitypreservation.ca/flyer/" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><path d="M15.5 15.5h2M15.5 18h4M19.5 15.5v2.5" opacity=".7"/></svg></div>
+        <div>
+          <h3>Survey Flyer</h3>
+          <div class="domain">survivorshipsurvey.fertilitypreservation.ca/flyer</div>
+        </div>
+        <p class="desc">Printable, QR-linked flyer promoting the clinician survivorship survey above.</p>
+      </a>
+
+      <a class="card" href="https://oma.fertilitypreservation.ca" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 15 9l3 3L7 23z"/><path d="m14 10 3-3 3 3-3 3"/><path d="M4 20v-3l1-1" opacity=".7"/></svg></div>
+        <div>
+          <h3>OMA Billing Code Campaign</h3>
+          <div class="domain">oma.fertilitypreservation.ca</div>
+        </div>
+        <p class="desc">Physician sign-on page backing a formal ask to the Ontario Medical Association to add billing codes for ovarian tissue harvesting and transplantation.</p>
+      </a>
+
+      <a class="card" href="https://survivorshipsurvey.fertilitypreservation.ca/cfas/" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.2 2.3 3.3 5.3 3.3 8.5s-1.1 6.2-3.3 8.5c-2.2-2.3-3.3-5.3-3.3-8.5S9.8 5.8 12 3.5z" opacity=".7"/></svg></div>
+        <div>
+          <h3>Canadian OTC Landscape Survey</h3>
+          <div class="domain">survivorshipsurvey.fertilitypreservation.ca/cfas</div>
+        </div>
+        <p class="desc">Maps ovarian tissue cryopreservation services, outcomes, costs and referral practices across Canadian centres.</p>
+      </a>
+
+    </div>
+    </div>
+  </section>
+
+  <!-- PERSONAL -->
+  <section class="cat" id="personal" style="--accent:var(--personal);--tint:var(--personal-tint);">
+    <div class="section-inner">
+    <div class="cat-head"><span class="cat-dot"></span><h2>Personal</h2><span class="count">3</span></div>
+    <div class="grid">
+
+      <a class="card" href="https://tty.co.il" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h14M5 21h14"/><path d="M7 3c0 5 4 6.5 4 9s-4 4-4 9M17 3c0 5-4 6.5-4 9s4 4 4 9" opacity=".6"/></svg></div>
+        <div>
+          <h3>TTY Systems</h3>
+          <div class="domain">tty.co.il</div>
+        </div>
+        <p class="desc">Coming-soon landing page with a launch countdown.</p>
+      </a>
+
+      <a class="card" href="https://michaeli.ca" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9.5a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V10"/></svg></div>
+        <div>
+          <h3>Michaeli Family</h3>
+          <div class="domain">michaeli.ca</div>
+        </div>
+        <p class="desc">Family site introducing the Michaeli team, with About and Contact pages.</p>
+      </a>
+
+      <a class="card" href="https://jonathan.michaeli.ca" target="_blank" rel="noopener">
+        <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="8" width="19" height="10" rx="4"/><path d="M7.5 11v4M5.5 13h4" /><circle cx="16" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="18.5" cy="14.5" r="1" fill="currentColor" stroke="none"/></svg></div>
+        <div>
+          <h3>Jonathan's Arcade</h3>
+          <div class="domain">jonathan.michaeli.ca</div>
+        </div>
+        <p class="desc">Two casual browser games: an ecology-themed rhythm survival game, and a geography quiz.</p>
+      </a>
+
+    </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Michaeli Projects — a personal index. Built with Claude.
+</footer>
+
+</body>
+</html>
